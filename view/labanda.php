@@ -13,17 +13,17 @@
     <div class="w3-row w3-padding-32">
         <div class="w3-third">
             <p>Name</p>
-            <img src="public/images/bandmember.jpg" class="w3-round w3-margin-bottom" alt="Random Name"
+            <img src="public/images/bandmember.png" class="w3-round w3-margin-bottom" alt="Random Name"
                  style="width:60%">
         </div>
         <div class="w3-third">
             <p>Name</p>
-            <img src="public/images/bandmember.jpg" class="w3-round w3-margin-bottom" alt="Random Name"
+            <img src="public/images/bandmember.png" class="w3-round w3-margin-bottom" alt="Random Name"
                  style="width:60%">
         </div>
         <div class="w3-third">
             <p>Name</p>
-            <img src="public/images/bandmember.jpg" class="w3-round" alt="Random Name" style="width:60%">
+            <img src="public/images/bandmember.png" class="w3-round" alt="Random Name" style="width:60%">
         </div>
     </div>
 </div>

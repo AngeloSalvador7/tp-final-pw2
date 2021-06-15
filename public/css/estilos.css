@@ -20,6 +20,10 @@ a{
     width: 500px;
 }
 
+nav{
+    background-color: #000;
+}
+
 
 /*footer*/
 
@@ -292,4 +296,96 @@ form .button input:hover {
         flex-direction: column;
     }
 
+}
+
+.portada {
+    background-color: rgb(0, 87, 124);
+    background-image: url(../images/camiones.jpeg);
+    background-blend-mode: soft-light;
+    background-position: 50% 100%;
+    background-repeat: no-repeat;
+    height: 600px;
+}
+
+:root{
+	--bs-secondary: #6c757d !important;
+}
+
+.info, .window {
+    min-height: 617px;
+}
+
+.btn:focus,.btn:active {
+    outline: none !important;
+    box-shadow: none;
+ }
+
+.rounded{
+    border-radius: 20px !important;
+}
+
+.list-group-item.active{
+    background-color: var(--bs-warning);
+    border-color: rgba(0, 0, 0, 0.125);
+}
+
+.list-group-item-action.active:hover{
+    background-color: #ffc825;
+}
+
+.perfil {
+    position: relative;
+    width: 50%;
+    max-width: 150px;
+    min-width: 100px;
+}
+
+.perfil:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+
+textarea{
+    resize: none;
+}
+
+.perfil img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 100%;
+    border: 3px white solid;
+    background-clip: content-box;
+}
+
+.opciones {
+    list-style: none;
+    padding: unset;
+    margin: 20px 0;
+    border-top: 1px var(--bs-secondary) solid;
+}
+
+.opciones li {
+    background-color: var(--bs-dark);
+    border-bottom: 1px var(--bs-secondary) solid;
+}
+
+.opciones li:hover {
+    background-color: gray;
+}
+
+.opciones a {
+    padding: 10px 20px;
+    text-decoration: none;
+    display: block;
+}
+
+#datos{
+    list-style: none;
+    padding: unset;
 }

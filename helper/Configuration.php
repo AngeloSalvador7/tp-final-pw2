@@ -8,7 +8,7 @@ include_once("model/SongModel.php");
 
 include_once("controller/SongController.php");
 include_once("controller/TourController.php");
-include_once("controller/LaBandaController.php");
+include_once("controller/LoginController.php");
 include_once("controller/QuieroSerParteController.php");
 
 include_once('third-party/mustache/src/Mustache/Autoloader.php');
@@ -53,8 +53,8 @@ class Configuration{
         return new SongController($cancionesModel, $this->getRender());
     }
 
-    public function getLaBandaController(){
-        return new LaBandaController($this->getRender());
+    public function getLoginController(){
+        return new LoginController($this->getRender());
     }
 
     public function getQuieroSerParteController(){
