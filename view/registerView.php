@@ -1,8 +1,9 @@
+{{> head}}
 {{> header}}
 
-        <form action="register/registerEmployee" method="POST">
+        <form action="index.php?module=register&action=registerEmployee" method="POST" name="register">
             <input type="number" name="dni">
-            <input type="text" name="fecha_nacimiento">
+            <input type="date" name="fecha_nacimiento">
             <input type="text" name="nombre">
             <input type="text" name="apellido">
             <input type="text" name="email">

@@ -41,7 +41,8 @@ class Configuration{
 
         /*Controller*/
     public function getRegisterController(){
-        return new RegisterController($this->getRender(),$this->getEmployeeModel());
+        $usuario=$this->getEmployeeModel();
+        return new RegisterController($usuario,$this->getRender());
     }
 
     public function getLoginController(){
