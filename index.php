@@ -10,3 +10,4 @@ $action = $urlHelper->getActionFromRequestOr("execute");
 
 $router = $configuration->getRouter();
 $router->executeActionFromModule($action, $module);
+

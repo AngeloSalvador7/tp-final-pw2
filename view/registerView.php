@@ -1,7 +1,8 @@
 {{> head}}
 {{> header}}
 
-        <form action="index.php?module=register&action=registerEmployee" method="POST" name="register">
+        <form action="register/registerEmployee
+        index.php?module=register&action=registerEmployee" method="POST"  >
             <input type="number" name="dni">
             <input type="date" name="fecha_nacimiento">
             <input type="text" name="nombre">

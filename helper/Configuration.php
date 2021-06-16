@@ -5,10 +5,12 @@ include_once("helper/Render.php");
 include_once("helper/UrlHelper.php");
 /*MODEL*/
 include_once("model/EmployeeModel.php");
+include_once("model/HomeModel.php");
 
 /*CONTROLLER*/
 include_once("controller/RegisterController.php");
 include_once("controller/LoginController.php");
+include_once ("controller/HomeController.php");
 
 
 /*Other*/
@@ -32,14 +34,20 @@ class Configuration{
         );
     }
 
-
     /*Model*/
     public function  getEmployeeModel(){
         return new employeeModel($this->getDatabase());
 }
 
+public function getHomeModel(){
+        return new HomeModel($this->getDatabase());
+}
 
         /*Controller*/
+    public function getHomeController(){
+        return new HomeController($this->getRender(),$this->getHomeModel());
+    }
+
     public function getRegisterController(){
         $usuario=$this->getEmployeeModel();
         return new RegisterController($usuario,$this->getRender());

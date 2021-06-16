@@ -1,9 +1,6 @@
 {{> head}}
 {{> header}}
-<?php
-session_start();
-echo $_SESSION['USUARIO']['email'];
-?>
+
 	<nav class="navbar navbar-dark navbar-expand-lg">
 		<div class="container-fluid">
 			<ul class="navbar-nav navbar-expand-lg">
