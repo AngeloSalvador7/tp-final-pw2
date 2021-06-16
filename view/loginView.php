@@ -1,19 +1,6 @@
-
+{{> head}}
 {{> header}}
 
-	<header class="container-fluid bg-dark text-warning pt-3">
-		<div class="row">
-			<div class="col-5 text-left mb-2">
-				<a><img src="public/images/bandmember.png" width="90px" height="90px" alt="Logo"></a>
-			</div>
-			<div class="col-7 d-flex flex-wrap justify-content-end align-items-center my-2">
-				<div class="btn-group-lg">
-					<a href="#"><button class="btn btn-outline-warning m-1"> Iniciar Sesion </button></a>
-					<a href="#"><button class="btn btn-outline-warning m-1"> Registrar </button></a>
-				</div>
-			</div>
-		</div>
-	</header>
 
 	<main class="container-fluid">
 		<div class="portada text-white row align-items-center">
