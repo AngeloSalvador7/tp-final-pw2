@@ -17,6 +17,3 @@ hs_err_pid*
 .project
 .classpath
 .settings/*
-
- # Resources
-/third-party/

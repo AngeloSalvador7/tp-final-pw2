@@ -6,8 +6,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-	<link rel="stylesheet" href="../css/bootstrap.min.css" />
-	<link rel="stylesheet" href="../css/estilos.css" />
+	<link rel="stylesheet" href="public/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="public/css/estilos.css" />
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
 	<script src="public/js/bootstrap.min.js"></script>
 
@@ -19,7 +19,7 @@
 	<header class="container-fluid bg-dark text-warning pt-3">
 		<div class="row">
 			<div class="col-5 text-left mb-2">
-				<a><img src="../images/bandmember.png" width="90px" height="90px"></a>
+				<a><img src="./public/images/bandmember.png" width="90px" height="90px"></a>
 			</div>
 			<div class="col-7 d-flex flex-wrap justify-content-end align-items-center my-2">
 				<div class="btn-group-lg">
