@@ -46,7 +46,7 @@ class Configuration{
     }
 
     public function getLoginController(){
-        return new LoginController($this->getRender());
+        return new LoginController($this->getRender(),$this->getEmployeeModel());
     }
 
     public function getRender(){
