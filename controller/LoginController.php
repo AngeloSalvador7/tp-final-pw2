@@ -22,8 +22,10 @@ class LoginController
         if ($result) {
             $_SESSION['usuario'] = $result[0];
             header("Location: /home");
+            exit();
         } else {
-            header("Location: /login");
+            header("Location: /");
+            exit();
         }
     }
 }
