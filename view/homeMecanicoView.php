@@ -20,6 +20,6 @@
     </div>
 </nav>
 
-<h1>Vista Chofer</h1>
+<h1>Vista Mecanico</h1>
 
 {{> footer}}
