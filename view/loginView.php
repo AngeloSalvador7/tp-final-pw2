@@ -5,7 +5,6 @@
 			<div class="ps-5 col-12 col-sm-6">
 				<h1>Transporte UNLAM</h1>
 				<h3>Transporte y distribución hecho simple</h3>
-                <h3>Hola {{email}}</h3>
 			</div>
 
 			<div class="col-12 col-sm-5">

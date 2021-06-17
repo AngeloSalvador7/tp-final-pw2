@@ -1,5 +1,5 @@
 {{> head}}
-{{> header}}
+{{> logout}}
 
 	<nav class="navbar navbar-dark navbar-expand-lg">
 		<div class="container-fluid">

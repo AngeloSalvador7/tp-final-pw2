@@ -23,10 +23,7 @@ class LoginController
             $_SESSION['usuario'] = $result[0];
             header("Location: /home");
         } else {
-            echo json_encode($_POST);
-            echo "<br>";
-            echo json_encode($result);
-            //header("Location: /login");
+            header("Location: /login");
         }
     }
 }

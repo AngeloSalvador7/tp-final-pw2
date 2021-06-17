@@ -11,6 +11,7 @@ include_once("model/HomeModel.php");
 include_once("controller/RegisterController.php");
 include_once("controller/LoginController.php");
 include_once ("controller/HomeController.php");
+include_once("controller/logoutController.php");
 
 
 /*Other*/
@@ -46,6 +47,10 @@ public function getHomeModel(){
         /*Controller*/
     public function getHomeController(){
         return new HomeController($this->getRender(),$this->getHomeModel());
+    }
+
+    public function getLogoutController(){
+        return new logoutController($this->getRender());
     }
 
     public function getRegisterController(){
