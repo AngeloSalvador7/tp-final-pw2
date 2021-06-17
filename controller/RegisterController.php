@@ -17,8 +17,7 @@ class RegisterController
     }
 
     public  function registerEmployee(){
-
-        $this->employeeModel->addEmployee($_POST["dni"],$_POST["fecha_nacimiento"],$_POST["nombre"],$_POST["apellido"],$_POST["email"],$_POST["clave"]);
+        $this->employeeModel->addEmployee($_POST);
     header ("Location: /");
 
 }}

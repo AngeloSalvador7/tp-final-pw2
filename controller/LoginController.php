@@ -13,17 +13,20 @@ class LoginController
 
     public function execute()
     {
-
         echo $this->render->render("view/loginView.php");
     }
 
     public function validateEmployee()
     {
-        $result = $this->employeeModel->loginEmployee($_POST["email"],$_POST["clave"]);
-        if($result) {
-            $_SESSION['usuario'] = array("email" => [0]["email"]);
+        $result = $this->employeeModel->loginEmployee($_POST);
+        if ($result) {
+            $_SESSION['usuario'] = $result[0];
+            header("Location: /home");
+        } else {
+            echo json_encode($_POST);
+            echo "<br>";
+            echo json_encode($result);
+            //header("Location: /login");
         }
-        header("Location: /tp-final-pw2/home");
-
     }
 }

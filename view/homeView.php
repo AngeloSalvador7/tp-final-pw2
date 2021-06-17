@@ -5,7 +5,7 @@
 		<div class="container-fluid">
 			<ul class="navbar-nav navbar-expand-lg">
 				<li class="nav-item active px-3">
-					<a class="nav-link" href="#">Flota</a>
+					<a class="nav-link" href="#">{{nombre}}</a>
 				</li>
 				<li class="nav-item px-3">
 					<a class="nav-link" href="#">Viajes</a>
