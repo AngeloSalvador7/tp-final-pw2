@@ -1,28 +1,25 @@
 <?php
-/*HELPERS*/
 include_once("helper/MysqlDatabase.php");
 include_once("helper/Render.php");
 include_once("helper/UrlHelper.php");
-/*MODEL*/
-include_once("model/EmployeeModel.php");
-include_once("model/HomeModel.php");
 
-/*CONTROLLER*/
-include_once("controller/RegisterController.php");
+include_once("model/EmpleadosModel.php");
+include_once("model/TourModel.php");
+include_once("model/SongModel.php");
+
 include_once("controller/LoginController.php");
-include_once ("controller/HomeController.php");
-include_once("controller/logoutController.php");
+include_once("controller/EmpleadosController.php");
+include_once("controller/SongController.php");
+include_once("controller/TourController.php");
+include_once("controller/QuieroSerParteController.php");
 
-
-/*Other*/
 include_once('third-party/mustache/src/Mustache/Autoloader.php');
 include_once("Router.php");
 
 class Configuration{
-
-
-    private function getConfig(){
-        return parse_ini_file("config/config.ini");
+    public function getPresentacionModel(){
+        $database = $this->getDatabase();
+        return new TourModel($database);
     }
 
     private function getDatabase(){
@@ -35,35 +32,45 @@ class Configuration{
         );
     }
 
-    /*Model*/
-    public function  getEmployeeModel(){
-        return new employeeModel($this->getDatabase());
-}
-
-public function getHomeModel(){
-        return new HomeModel($this->getDatabase());
-}
-
-        /*Controller*/
-    public function getHomeController(){
-        return new HomeController($this->getRender(),$this->getHomeModel());
+    private function getConfig(){
+        return parse_ini_file("config/config.ini");
     }
 
-    public function getLogoutController(){
-        return new logoutController($this->getRender());
+    public function getCancionModel(){
+        $database = $this->getDatabase();
+        return new SongModel($database);
     }
 
-    public function getRegisterController(){
-        $usuario=$this->getEmployeeModel();
-        return new RegisterController($usuario,$this->getRender());
-    }
-
-    public function getLoginController(){
-        return new LoginController($this->getRender(),$this->getEmployeeModel());
+    public function getEmpleadosModel(){
+        $database = $this->getDatabase();
+        return new EmpleadosModel($database);
     }
 
     public function getRender(){
         return new Render('view/partial');
+    }
+
+    public function getLoginController(){
+        return new LoginController($this->getRender());
+    }
+
+    public function getEmpleadosController(){
+        $empleadosModel = $this->getEmpleadosModel();
+        return new EmpleadosController($this->getRender(), $empleadosModel);
+    }
+    public function getTourController(){
+        $presentacionModel = $this->getPresentacionModel();
+        return new TourController($presentacionModel, $this->getRender());
+    }
+
+    public function getSongController(){
+        $cancionesModel = $this->getCancionModel();
+        return new SongController($cancionesModel, $this->getRender());
+    }
+
+
+    public function getQuieroSerParteController(){
+        return new QuieroSerParteController($this->getRender());
     }
 
     public function getRouter(){
