@@ -15,7 +15,7 @@ create table empleado(
     apellido varchar(50) not null,
     email varchar(50) not null unique,
     clave varchar(50) not null,
-    id_rol int not null,
+    id_rol int,
     primary key (id),
     foreign key(id_rol) references rol(id)
 );

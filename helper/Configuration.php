@@ -3,12 +3,14 @@ include_once("helper/MysqlDatabase.php");
 include_once("helper/Render.php");
 include_once("helper/UrlHelper.php");
 
+include_once("model/EmpleadosModel.php");
 include_once("model/TourModel.php");
 include_once("model/SongModel.php");
 
+include_once("controller/LoginController.php");
+include_once("controller/EmpleadosController.php");
 include_once("controller/SongController.php");
 include_once("controller/TourController.php");
-include_once("controller/LoginController.php");
 include_once("controller/QuieroSerParteController.php");
 
 include_once('third-party/mustache/src/Mustache/Autoloader.php');
@@ -39,10 +41,23 @@ class Configuration{
         return new SongModel($database);
     }
 
+    public function getEmpleadosModel(){
+        $database = $this->getDatabase();
+        return new EmpleadosModel($database);
+    }
+
     public function getRender(){
         return new Render('view/partial');
     }
 
+    public function getLoginController(){
+        return new LoginController($this->getRender());
+    }
+
+    public function getEmpleadosController(){
+        $empleadosModel = $this->getEmpleadosModel();
+        return new EmpleadosController($this->getRender(), $empleadosModel);
+    }
     public function getTourController(){
         $presentacionModel = $this->getPresentacionModel();
         return new TourController($presentacionModel, $this->getRender());
@@ -53,9 +68,6 @@ class Configuration{
         return new SongController($cancionesModel, $this->getRender());
     }
 
-    public function getLoginController(){
-        return new LoginController($this->getRender());
-    }
 
     public function getQuieroSerParteController(){
         return new QuieroSerParteController($this->getRender());
