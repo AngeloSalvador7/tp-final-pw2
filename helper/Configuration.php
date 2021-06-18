@@ -11,7 +11,7 @@ include_once("model/HomeModel.php");
 include_once("controller/RegisterController.php");
 include_once("controller/LoginController.php");
 include_once ("controller/HomeController.php");
-include_once("controller/logoutController.php");
+include_once("controller/LogoutController.php");
 
 
 /*Other*/

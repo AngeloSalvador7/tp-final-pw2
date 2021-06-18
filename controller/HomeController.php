@@ -13,10 +13,10 @@ class HomeController
 
     public function execute()
     {
-        $this->vistaUsuarioLogueado();
+        $this->loginUserView();
     }
 
-    public function vistaUsuarioLogueado()
+    public function loginUserView()
     {
         if(!$_SESSION['usuario']){
             header("Location: /");
