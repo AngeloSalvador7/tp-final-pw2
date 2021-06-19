@@ -18,5 +18,4 @@ hs_err_pid*
 .classpath
 .settings/*
 
- # Resources
 /third-party/
