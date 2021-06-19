@@ -18,6 +18,6 @@ class RegisterController
 
     public  function registerEmployee(){
         $this->employeeModel->addEmployee($_POST);
-    header ("Location: /");
-
-}}
+        header ("Location: /");
+    }
+}

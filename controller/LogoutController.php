@@ -1,6 +1,6 @@
 <?php
 
-class logoutController{
+class LogoutController{
 
     private $render;
 
