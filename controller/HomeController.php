@@ -27,19 +27,20 @@ class HomeController
 
         switch($data['usuario']['id_rol']) {
             case 1:
-                echo $this->render->render("view/homeAdminView.php", $data);
+                header('location: /empleados');
                 break;
             case 2:
-                echo $this->render->render("view/homeSupervisorView.php", $data);
+                echo $this->render->render("view/homeChoferView.php", $data);
                 break;
             case 3:
-                echo $this->render->render("view/homeChoferView.php", $data);
+                echo $this->render->render("view/homeSupervisorView.php", $data);
                 break;
             case 4:
                 echo $this->render->render("view/homeMecanicoView.php", $data);
                 break;
             default;
                 echo $this->render->render("view/homeSinRolView.php", $data);
+                break;
         }
     }
 

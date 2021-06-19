@@ -1,19 +1,20 @@
-    {{> header}}
+    {{> head}}
+	{{> headerLogueado}}
 
 	<nav class="navbar navbar-dark navbar-expand-lg">
 		<div class="container-fluid">
 			<ul class="navbar-nav navbar-expand-lg">
 				<li class="nav-item active px-3">
-					<a class="nav-link" href="#">Flota</a>
+					<a class="nav-link" href="home">Flota</a>
 				</li>
 				<li class="nav-item px-3">
-					<a class="nav-link" href="#">Viajes</a>
+					<a class="nav-link" href="home">Viajes</a>
 				</li>
 				<li class="nav-item px-3">
-					<a class="nav-link" href="#">Empleados</a>
+					<a class="nav-link" href="empleados">Empleados</a>
 				</li>
 				<li class="nav-item px-3">
-					<a class="nav-link" href="#">Estadisticas</a>
+					<a class="nav-link" href="home">Estadisticas</a>
 				</li>
 			</ul>
 		</div>

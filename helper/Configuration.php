@@ -3,13 +3,10 @@
 include_once("helper/MysqlDatabase.php");
 include_once("helper/Render.php");
 include_once("helper/UrlHelper.php");
-/*MODEL*/
-include_once("model/EmployeeModel.php");
-include_once("model/HomeModel.php");
 
+/*MODEL*/
+include_once("model/HomeModel.php");
 include_once("model/EmpleadosModel.php");
-include_once("model/TourModel.php");
-include_once("model/SongModel.php");
 
 /*CONTROLLER*/
 include_once("controller/EmpleadosController.php");
@@ -40,10 +37,6 @@ class Configuration{
     }
 
     /*Model*/
-    public function  getEmployeeModel(){
-        return new employeeModel($this->getDatabase());
-    }
-
     public function getHomeModel(){
             return new HomeModel($this->getDatabase());
     }
@@ -68,12 +61,12 @@ class Configuration{
     }
 
     public function getRegisterController(){
-        $usuario=$this->getEmployeeModel();
+        $usuario=$this->getEmpleadosModel();
         return new RegisterController($usuario,$this->getRender());
     }
 
     public function getLoginController(){
-        return new LoginController($this->getRender(),$this->getEmployeeModel());
+        return new LoginController($this->getRender(),$this->getEmpleadosModel());
     }
 
     public function getRender(){

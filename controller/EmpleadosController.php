@@ -9,7 +9,6 @@ class EmpleadosController
     {
         $this->render = $render;
         $this->empleadosModel = $empleadosModel;
-        $_SESSION['usuario'] = $this->empleadosModel->getEmpleadoById(1)[0];
     }
 
     public function execute()
@@ -24,10 +23,12 @@ class EmpleadosController
         $this->validarSesion();
         $datos['empleados'] = $this->empleadosModel->getNuevosEmpleados();
         $datos['roles'] = $this->empleadosModel->getRol();
+
         if(isset($_SESSION['mensaje'])) {
             $datos['mensaje'] = $_SESSION['mensaje'];
             unset( $_SESSION['mensaje']);
         }
+        
         echo $this->render->render("view/empleados.php", $datos);
     }
 
@@ -47,7 +48,7 @@ class EmpleadosController
 
     private function validarSesion(){
         if(!isset($_SESSION['usuario']) || $_SESSION['usuario']['descripcion'] != "ADMINISTRADOR") {
-            header('location: http://localhost');
+            header('location: http://localhost/home');
             exit();
         }
     }
