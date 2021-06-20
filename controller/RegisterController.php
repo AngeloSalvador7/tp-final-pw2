@@ -17,7 +17,9 @@ class RegisterController
     }
 
     public  function registerEmployee(){
-        $this->employeeModel->addEmployee($_POST);
-        header ("Location: /");
-    }
-}
+        $result=$this->employeeModel->addEmployee($_POST);
+        if($result) {
+            header("Location: /register");
+        }
+        header("Location: /");
+}}
