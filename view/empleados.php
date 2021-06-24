@@ -68,9 +68,9 @@
 
                                 <select name="rol" id="lista">
                                     <option value="" selected disabled hidden>Elija Rol</option>
-                                    {{#roles}}
-                                    <option value="{{rol}}">{{descripcion}}</option>
-                                    {{/roles}}
+                                    {{#tiposArrastre}}
+                                    <option value="{{id}}">{{descripcion}}</option>
+                                    {{/tiposArrastre}}
                                 </select>
 
                                 <button class="btn btn-outline-danger m-1" type="submit" name="empleado" value="{{id}}">Guardar</button>

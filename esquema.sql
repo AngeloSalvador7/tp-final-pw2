@@ -47,7 +47,7 @@ create table vehiculo(
 );
 
 create table carga(
-	id int not null,
+	id int auto_increment not null,
     peso_neto int not null,
     hazard bit(1) not null,
     imo_class int null,

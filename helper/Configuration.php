@@ -7,6 +7,7 @@ include_once("helper/UrlHelper.php");
 /*MODEL*/
 include_once("model/HomeModel.php");
 include_once("model/EmpleadosModel.php");
+include_once("model/CargasModel.php");
 
 /*CONTROLLER*/
 include_once("controller/EmpleadosController.php");
@@ -14,6 +15,7 @@ include_once("controller/RegisterController.php");
 include_once("controller/LoginController.php");
 include_once("controller/HomeController.php");
 include_once("controller/LogoutController.php");
+include_once("controller/SupervisorCargaController.php");
 
 
 /*Other*/
@@ -39,6 +41,10 @@ class Configuration{
     /*Model*/
     public function getHomeModel(){
             return new HomeModel($this->getDatabase());
+    }
+    public function getCargasModel(){
+        $database = $this->getDatabase();
+        return new CargasModel($database);
     }
 
     public function getEmpleadosModel(){
@@ -69,6 +75,9 @@ class Configuration{
         return new LoginController($this->getRender(),$this->getEmpleadosModel());
     }
 
+    public function getCargasController(){
+        return new SupervisorCargaController($this->getRender(),$this->getCargasModel());
+    }
     public function getRender(){
         return new Render('view/partial');
     }
