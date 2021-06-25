@@ -12,6 +12,7 @@ class MysqlDatabase{
         );
 
         if (!$conn) {
+            echo "error";
             die("Connection failed: " . mysqli_connect_error());
         }
         $this->connection = $conn;

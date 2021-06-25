@@ -22,4 +22,5 @@ class RegisterController
             header("Location: /register");
         }
         header("Location: /");
-}}
+}
+}
