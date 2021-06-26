@@ -10,3 +10,9 @@ VALUES (346023745, "1990-11-05", "Juana", "Alfonso", "alfonsoa@gmail.com", "juan
 
 INSERT INTO empleado(dni, fecha_nacimiento, nombre, apellido, email, clave, id_rol) 
 VALUES (3798945, "1988-10-25", "Franco", "Davila", "davilaf@gmail.com", "franquito", null);
+
+INSERT INTO empleado(dni, fecha_nacimiento, nombre, apellido, email, clave, id_rol) 
+VALUES (3398945, "1978-12-02", "Pablo", "Oliva", "olivap@gmail.com", "oliva", null);
+
+update empleado set id_rol=null where id=4
+

@@ -36,7 +36,7 @@
 
 				<ul class="opciones">
 					<li><a class="text-white" href="empleados">Empleados</a></li>
-					<li><a class="text-white" href="empleados/nuevosEmpleados">Nuevos empleados</a></li>
+					<li><a class="text-white" href="empleados/empleadosSinRol">Nuevos empleados</a></li>
 				</ul>
 
 			</div>
@@ -53,6 +53,7 @@
 							<th scope="col">Apellido</th>
                             <th scope="col">Email</th>
                             <th scope="col">Rol</th>
+                            <th scope="col">Acciones</th>
                         </tr>
 					</thead>
 					<tbody>
@@ -72,14 +73,24 @@
                                     <option value="{{rol}}">{{descripcion}}</option>
                                     {{/roles}}
                                 </select>
-
-                                <button class="btn btn-outline-danger m-1" type="submit" name="empleado" value="{{id}}">Guardar</button>
+                                <br>
+                                <button class="btn btn-outline-success m-1" type="submit" name="empleado" value="{{id}}">Guardar</button>
                             </form>
+
                             </td>
+                            <td>
+                                {{#empleadosSinRol}}
+                                <button form="editar" class="btn btn-outline-secondary m-1" name="editar_id" value="{{id}}">Editar</button>
+                                {{/empleadosSinRol}}
+                               <button form="eliminar" name="eliminar_id" value="{{id}}" class="btn btn-outline-danger m-1">Eliminar</button>
+                            </td>
+
                         </tr>
                     {{/empleados}}
 					</tbody>
 				</table>
+                <form name="editar" id="editar" method="POST" action="empleados/editarEmpleados"></form>
+                <form id="eliminar" method="POST" action="empleados/eliminarEmpleado"></form>
                 <h3>{{mensaje}}</h3>
 			</div>
 
