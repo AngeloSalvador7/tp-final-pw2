@@ -1,0 +1,203 @@
+{{#listaProformas}}
+    <div class="window text-dark mx-3">
+        <h1 class="mt-2">Proformas</h1>
+        <hr />
+        {{> alerta}}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Ver</th>
+                    <th scope="col">Nro. Proforma</th>
+                    <th scope="col">ETD</th>
+                    <th scope="col">ETA</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Chofer</th>
+                    <th scope="col">Presupuesto</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#proformas}}
+                    <form action="proformas/accion" method="POST" id="P{{Proforma}}">
+                        <input type="hidden" name="proforma" value="{{Proforma}}">
+                    </form>
+                    <tr class="align-middle">
+                        <td><a href="proformas/detalle/cod={{Proforma}}" class="btn m-1 btn-outline-info"><i class ="fas fa-eye"></i></a></td>
+                        <td>#{{Proforma}}</td>
+                        <td>{{ETD}}</td>
+                        <td>{{ETA}}</td>
+                        <td>{{Estado}}</td>
+                        <td>{{Cliente}}</td>
+                        <td>{{Chofer}}</td>
+                        <td>U$D {{Costo}}</td>
+                        <td>
+                            <button type="submit" form="P{{Proforma}}" value="MODIFICAR" name="accion" class="btn m-1 btn-outline-warning">Modificar</button>
+                            <button type="submit" form="P{{Proforma}}" value="BORRAR" name="accion" class="btn m-1 btn-outline-danger">Borrar</button>
+                        </td>
+                    </tr>
+                {{/proformas}}
+            </tbody>
+        </table>
+    </div>
+{{/listaProformas}}
+
+
+
+{{#detalleProforma}}
+    <div class="window text-dark mx-3">
+        <h1 class="mt-2">Información de Proforma Nro: #{{codigoProforma}}</h1>
+        <hr />
+        {{> alerta}}
+        {{#proforma}}
+            <div class="d-flex flex-wrap justify-content-between p-4 bg-gris">
+                <h2 class="flex-basis mb-0">Presupuesto</h2>
+                <hr class="text-white flex-basis">
+                <div>
+                    <strong>Peajes: </strong>U$D{{Peaje}}
+                </div>
+                <div>
+                    <strong>Viaticos: </strong>U$D{{Viaticos}}
+                </div>
+                <div>
+                    <strong>Hospedaje: </strong>U$D{{Hospedaje}}
+                </div>
+                <div>
+                    <strong>Extras: </strong>U$D{{Extras}}
+                </div>
+                <div>
+                    <strong>TOTAL: </strong>U$D{{Costo}}
+                </div>
+            </div>
+            
+
+            <div class="d-flex flex-wrap justify-content-between p-4 bg-grisClaro">
+                <h2 class="flex-basis mb-0">Viaje</h2>
+                <hr class="text-white flex-basis">
+                <div>
+                    <strong>Origen: </strong>{{Origen}}
+                </div>
+                <div>
+                    <strong>Destino: </strong>{{Destino}}
+                </div>
+                <div>
+                    <strong>ETD: </strong>{{ETA}}
+                </div>
+                <div>
+                    <strong>ETA: </strong>{{ETA}}
+                </div>
+                <div>
+                    <strong>Estado: </strong>{{Estado}}
+                </div>
+                <div>
+                    <strong>Kilometros Estimados: </strong>{{Kilometros}}Km.
+                </div>
+                <div>
+                    <strong>Combustible Estimados: </strong>{{Combustible}}Lts.
+                </div>
+            </div>
+
+            <div class="d-flex flex-wrap justify-content-between p-4 bg-gris">
+                <h2 class="flex-basis mb-0">Cliente</h2>
+                <hr class="text-white flex-basis">
+                <div>
+                    <strong>Denominacion: </strong>{{Denominacion}}
+                </div>
+                <div>
+                    <strong>Razon Social: </strong>{{RazonSocial}}
+                </div>
+                <div>
+                    <strong>CUIT: </strong>{{CUIT}}
+                </div>
+                <div>
+                    <strong>Direccion: </strong>{{Direccion}}
+                </div>
+                <div>
+                    <strong>Telefono: </strong>{{Telefono}}
+                </div>
+                <div>
+                    <strong>Email: </strong>{{EmailCliente}}
+                </div>
+            </div>
+
+            <div class="d-flex flex-wrap justify-content-between p-4 bg-grisClaro">
+                <h2 class="flex-basis mb-0">Chofer</h2>
+                <hr class="text-white flex-basis">
+                <div>
+                    <strong>Apellido y Nombre: </strong>{{Chofer}}
+                </div>
+                <div>
+                    <strong>DNI: </strong>{{DNI}}
+                </div>
+                <div>
+                    <strong>Email: </strong>{{EmailChofer}}
+                </div>
+                <div>
+                    <strong>Licencia: </strong>{{NumeroLicencia}}
+                </div>
+            </div>
+
+            <div class="d-flex flex-wrap justify-content-between p-4 bg-gris">
+                <h2 class="flex-basis mb-0">Vehiculos</h2>
+                <hr class="text-white flex-basis">
+                <div class="flex-fill">
+                    <div class="d-flex flex-wrap justify-content-between me-sm-4">
+                        <h3 class="flex-basis mb-0 text-center">Tractor</h3>
+                        <hr class="text-white flex-basis">
+                        <div>
+                            <strong>Marca: </strong>{{TMarca}}
+                        </div>
+                        <div>
+                            <strong>Patente: </strong>{{TPatente}}
+                        </div>
+                        <div>
+                            <strong>Modelo: </strong>{{TModelo}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex-fill">
+                    <div class="d-flex flex-wrap justify-content-between ms-sm-4">
+                        <h3 class="flex-basis mb-0 text-center">Arrastre</h3>
+                        <hr class="text-white flex-basis">
+                        <div>
+                            <strong>Patente: </strong>{{APatente}}
+                        </div>
+                        <div>
+                            <strong>Marca: </strong>{{AMarca}}
+                        </div>
+                        <div>
+                            <strong>Modelo: </strong>{{AModelo}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-wrap justify-content-between p-4 bg-grisClaro mb-4">
+                <h2 class="flex-basis mb-0">Carga</h2>
+                <hr class="text-white flex-basis">
+                <div>
+                    <strong>Peso Neto: </strong>{{Peso}}Kg
+                </div>
+                <div>
+                    <strong>Hazard: </strong>{{Hazard}}
+                </div>
+                <div>
+                    <strong>IMO Class: </strong>{{IMOClass}}
+                </div>
+                <div>
+                    <strong>IMO Sub-Class: </strong>{{IMOSClass}}
+                </div>
+                <div>
+                    <strong>Reefer: </strong>{{Reefer}}
+                </div>
+                <div>
+                    <strong>Temperatura: </strong>{{Temperatura}}
+                </div>
+                <div>
+                    <strong>Tipo de Carga: </strong>{{TipoCarga}}
+                </div>
+            </div>
+        {{/proforma}}
+    </div>
+{{/detalleProforma}}

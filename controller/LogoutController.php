@@ -10,6 +10,6 @@ class LogoutController{
 
     public function  execute(){
         session_destroy();
-        echo $this->render->render("view/loginView.php");
+        header('location: /');
     }
 }

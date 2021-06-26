@@ -132,4 +132,71 @@ foreign key(id_mecanico) references empleado(id),
 primary key (id)
 );
 
+CREATE VIEW ProformaResumen
+AS
+SELECT 
+	PRE.id AS 'Proforma',
+    VJ.etd AS  'ETD',
+    VJ.eta AS 'ETA',
+    VJ.estado AS 'Estado',
+    CL.razon_social AS 'Cliente',
+    concat(EMP.apellido, ', ', EMP.nombre) AS 'Chofer',
+    PRE.costo_peaje_estimado + PRE.costo_viaticos_estimado + PRE.costo_hospedaje_estimado + PRE.extra_estimado AS 'Costo'
+FROM 
+	presupuesto PRE 
+		JOIN viaje VJ ON PRE.id_viaje = VJ.id
+        JOIN cliente CL ON VJ.id_cliente = CL.id
+        JOIN chofer CH ON VJ.id_chofer = CH.id_empleado
+        JOIN empleado EMP ON CH.id_empleado = EMP.id;
 
+
+CREATE VIEW ProformaCompleta
+AS
+SELECT 
+	PRE.id AS 'Proforma',
+    PRE.costo_peaje_estimado AS 'Peaje',
+    PRE.costo_viaticos_estimado AS 'Viaticos',
+    PRE.costo_hospedaje_estimado AS 'Hospedaje',
+    PRE.extra_estimado AS 'Extras',
+    PRE.costo_peaje_estimado + PRE.costo_viaticos_estimado + PRE.costo_hospedaje_estimado + PRE.extra_estimado AS 'Costo',
+    VJ.origen AS 'Origen',
+    VJ.destino AS 'Destino',
+    VJ.etd AS  'ETD',
+    VJ.eta AS 'ETA',
+    VJ.estado AS 'Estado',
+    VJ.km_estimado AS 'Kilometros',
+    VJ.combustible_estimado AS 'Combustible',
+    CL.denominacion AS 'Denominacion',
+    CL.razon_social AS 'RazonSocial',
+    CL.cuit AS 'CUIT',
+    CL.direccion AS 'Direccion',
+    CL.telefono AS 'Telefono',
+    CL.email AS 'EmailCliente',
+    concat(EMP.apellido, ', ', EMP.nombre) AS 'Chofer',
+    EMP.dni AS 'DNI',
+    EMP.email AS 'EmailChofer',
+    CH.numero_licencia AS 'NumeroLicencia',
+    TR.marca AS 'TMarca',
+    TR.patente AS 'TPatente',
+    TR.modelo AS 'TModelo',
+    ARR.marca AS 'AMarca',
+    ARR.patente AS 'APatente',
+    ARR.modelo AS 'AModelo',
+    CRG.peso_neto AS 'Peso',
+    CRG.hazard AS 'Hazard',
+    CRG.imo_class AS 'IMOClass',
+    CRG.imo_sclass AS 'IMOSClass',
+    CRG.reefer AS 'Reefer',
+    concat(CRG.temperatura, '°C') AS 'Temperatura',
+    TARR.descripcion AS 'TipoCarga'
+FROM 
+	presupuesto PRE 
+		JOIN viaje VJ ON PRE.id_viaje = VJ.id
+        JOIN cliente CL ON VJ.id_cliente = CL.id
+        JOIN vehiculo TR ON VJ.id_tractor = TR.id
+        JOIN vehiculo ARR ON VJ.id_arrastre = ARR.id
+        JOIN carga CRG ON VJ.id_carga = CRG.id
+        JOIN tipo_arrastre TARR ON CRG.id_tipo = TARR.id 
+        JOIN chofer CH ON VJ.id_chofer = CH.id_empleado
+        JOIN empleado EMP ON CH.id_empleado = EMP.id;
+    

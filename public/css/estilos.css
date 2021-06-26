@@ -24,6 +24,21 @@ nav{
     background-color: #000;
 }
 
+/* Colores */
+
+.bg-gris{
+    background-color: rgb(194, 194, 194);   
+}
+
+.bg-grisClaro{
+    background-color: rgb(223, 223, 223);
+}
+
+/* Addons */
+
+.flex-basis{
+    flex: 0 0 100%;
+}
 
 /*footer*/
 

@@ -33,8 +33,7 @@ class HomeController
                 echo $this->render->render("view/homeChoferView.php", $data);
                 break;
             case 3:
-                $data['vistaHome']=true;
-                echo $this->render->render("view/homeSupervisorView.php", $data);
+                header('location: /proformas');
                 break;
             case 4:
                 echo $this->render->render("view/homeMecanicoView.php", $data);

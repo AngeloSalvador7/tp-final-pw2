@@ -4,12 +4,6 @@
 	<nav class="navbar navbar-dark navbar-expand-lg">
 		<div class="container-fluid">
 			<ul class="navbar-nav navbar-expand-lg">
-				<li class="nav-item active px-3">
-					<a class="nav-link" href="home">Flota</a>
-				</li>
-				<li class="nav-item px-3">
-					<a class="nav-link" href="home">Viajes</a>
-				</li>
 				<li class="nav-item px-3">
 					<a class="nav-link" href="empleados">Empleados</a>
 				</li>
@@ -68,9 +62,9 @@
 
                                 <select name="rol" id="lista">
                                     <option value="" selected disabled hidden>Elija Rol</option>
-                                    {{#tiposArrastre}}
-                                    <option value="{{id}}">{{descripcion}}</option>
-                                    {{/tiposArrastre}}
+                                    {{#roles}}
+                                    	<option value="{{rol}}">{{descripcion}}</option>
+                                    {{/roles}}
                                 </select>
 
                                 <button class="btn btn-outline-danger m-1" type="submit" name="empleado" value="{{id}}">Guardar</button>

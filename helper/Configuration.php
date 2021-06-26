@@ -3,11 +3,13 @@
 include_once("helper/MysqlDatabase.php");
 include_once("helper/Render.php");
 include_once("helper/UrlHelper.php");
+include_once("helper/SessionCheck.php");
 
 /*MODEL*/
 include_once("model/HomeModel.php");
 include_once("model/EmpleadosModel.php");
 include_once("model/CargasModel.php");
+include_once("model/ProformasModel.php");
 
 /*CONTROLLER*/
 include_once("controller/EmpleadosController.php");
@@ -16,6 +18,7 @@ include_once("controller/LoginController.php");
 include_once("controller/HomeController.php");
 include_once("controller/LogoutController.php");
 include_once("controller/SupervisorCargaController.php");
+include_once("controller/ProformasController.php");
 
 
 /*Other*/
@@ -52,6 +55,11 @@ class Configuration{
         return new EmpleadosModel($database);
     }
 
+    public function getProformasModel(){
+        $database = $this->getDatabase();
+        return new ProformasModel($database);
+    }
+
     /*Controller*/
     public function getEmpleadosController(){
         $empleadosModel = $this->getEmpleadosModel();
@@ -60,6 +68,10 @@ class Configuration{
 
     public function getHomeController(){
         return new HomeController($this->getRender(),$this->getHomeModel());
+    }
+
+    public function getProformasController(){
+        return new ProformasController($this->getRender(), $this->getProformasModel());
     }
 
     public function getLogoutController(){
