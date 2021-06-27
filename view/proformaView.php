@@ -18,7 +18,7 @@
 </nav>
 
 <main>
-    <div id="main" class="text-white">
+    <div id="main">
 
         {{> proformasPartial}}
 

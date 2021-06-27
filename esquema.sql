@@ -75,15 +75,15 @@ create table viaje(
 id int auto_increment not null,
 origen varchar(50) not null,
 destino varchar(50) not null,
-fecha_carga date not null,
+fecha_carga date null,
 eta date not null,
 etd date not null,
-fecha_llegada date not null,
+fecha_llegada date null,
 estado varchar(50) not null,
 km_estimado int not null,
-km_real int not null,
+km_real int null,
 combustible_estimado int not null,
-combustible_real int not null,
+combustible_real int null,
 id_chofer int not null,
 id_tractor int not null,
 id_arrastre int not null,
@@ -166,6 +166,11 @@ SELECT
     VJ.estado AS 'Estado',
     VJ.km_estimado AS 'Kilometros',
     VJ.combustible_estimado AS 'Combustible',
+    VJ.id_tractor AS 'IdTractor',
+    VJ.id_arrastre AS 'IdArrastre',
+    VJ.id_cliente AS 'IdCliente',
+    VJ.id_chofer AS 'IdChofer',
+    VJ.id_carga AS 'IdCarga',
     CL.denominacion AS 'Denominacion',
     CL.razon_social AS 'RazonSocial',
     CL.cuit AS 'CUIT',
@@ -199,4 +204,38 @@ FROM
         JOIN tipo_arrastre TARR ON CRG.id_tipo = TARR.id 
         JOIN chofer CH ON VJ.id_chofer = CH.id_empleado
         JOIN empleado EMP ON CH.id_empleado = EMP.id;
+
+CREATE VIEW Tractores
+AS
+SELECT 
+	VH.id 'IdTractor' , 
+    concat(VH.marca, ' - ', VH.modelo, ' - ', VH.patente) AS 'InfoTractor' 
+FROM 
+	vehiculo VH
+WHERE
+	VH.id NOT IN(SELECT id_tractor FROM Viaje WHERE estado <> 'Finalizado')
+		AND VH.id_tipo IS NULL 
+
+CREATE VIEW Arrastres
+AS
+SELECT 
+	VH.id 'IdArrastre' , 
+    concat(VH.marca, ' - ', VH.modelo, ' - ', VH.patente) AS 'InfoArrastre' 
+FROM 
+	vehiculo VH
+WHERE
+	VH.id NOT IN(SELECT id_arrastre FROM Viaje WHERE estado <> 'Finalizado')
+		AND VH.id_tipo IS NOT NULL 
+
+CREATE VIEW ChoferesDisponibles
+AS
+SELECT
+	CH.id_empleado AS 'IdChofer',
+	concat(EMP.apellido, ', ', EMP.nombre, ' (DNI: ', EMP.dni, ')') AS 'InfoChofer'
+FROM
+	chofer CH
+		JOIN empleado EMP ON CH.id_empleado = EMP.id
+WHERE
+	CH.numero_licencia IS NOT NULL
+		AND CH.id_empleado NOT IN(SELECT id_chofer FROM viaje WHERE estado <> 'Finalizado');
     
