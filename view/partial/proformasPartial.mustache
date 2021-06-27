@@ -47,7 +47,10 @@
 
 {{#detalleProforma}}
     <div class="window text-dark mx-3">
-        <h1 class="mt-2">Información de Proforma Nro: #{{codigoProforma}}</h1>
+        <div>
+            <a href="proformas" class="btn mt-2 btn-outline-success float-end">Volver</a>
+            <h1 class="mt-2">Información de Proforma Nro: #{{codigoProforma}}</h1>
+        </div>
         <hr />
         {{> alerta}}
         {{#proforma}}
@@ -203,6 +206,8 @@
     </div>
 {{/detalleProforma}}
 
+
+
 {{#formNuevaProforma}}
 <form action="proformas/generar" method="POST" class="row m-5" id="formProforma">
     {{> alerta}}
@@ -333,6 +338,8 @@
     </div>
 </form>
 {{/formNuevaProforma}}
+
+
 
 {{#formActProforma}}
 <form action="proformas/modificar" method="POST" class="row m-5" id="formProforma">
