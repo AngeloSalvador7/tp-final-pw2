@@ -75,15 +75,15 @@ create table viaje(
 id int auto_increment not null,
 origen varchar(50) not null,
 destino varchar(50) not null,
-fecha_carga date not null,
+fecha_carga date null,
 eta date not null,
 etd date not null,
-fecha_llegada date not null,
+fecha_llegada date null,
 estado varchar(50) not null,
 km_estimado int not null,
-km_real int not null,
+km_real int null,
 combustible_estimado int not null,
-combustible_real int not null,
+combustible_real int null,
 id_chofer int not null,
 id_tractor int not null,
 id_arrastre int not null,
@@ -132,4 +132,110 @@ foreign key(id_mecanico) references empleado(id),
 primary key (id)
 );
 
+CREATE VIEW ProformaResumen
+AS
+SELECT 
+	PRE.id AS 'Proforma',
+    VJ.etd AS  'ETD',
+    VJ.eta AS 'ETA',
+    VJ.estado AS 'Estado',
+    CL.razon_social AS 'Cliente',
+    concat(EMP.apellido, ', ', EMP.nombre) AS 'Chofer',
+    PRE.costo_peaje_estimado + PRE.costo_viaticos_estimado + PRE.costo_hospedaje_estimado + PRE.extra_estimado AS 'Costo'
+FROM 
+	presupuesto PRE 
+		JOIN viaje VJ ON PRE.id_viaje = VJ.id
+        JOIN cliente CL ON VJ.id_cliente = CL.id
+        JOIN chofer CH ON VJ.id_chofer = CH.id_empleado
+        JOIN empleado EMP ON CH.id_empleado = EMP.id;
 
+
+CREATE VIEW ProformaCompleta
+AS
+SELECT 
+	PRE.id AS 'Proforma',
+    PRE.costo_peaje_estimado AS 'Peaje',
+    PRE.costo_viaticos_estimado AS 'Viaticos',
+    PRE.costo_hospedaje_estimado AS 'Hospedaje',
+    PRE.extra_estimado AS 'Extras',
+    PRE.costo_peaje_estimado + PRE.costo_viaticos_estimado + PRE.costo_hospedaje_estimado + PRE.extra_estimado AS 'Costo',
+    VJ.origen AS 'Origen',
+    VJ.destino AS 'Destino',
+    VJ.etd AS  'ETD',
+    VJ.eta AS 'ETA',
+    VJ.estado AS 'Estado',
+    VJ.km_estimado AS 'Kilometros',
+    VJ.combustible_estimado AS 'Combustible',
+    VJ.id_tractor AS 'IdTractor',
+    VJ.id_arrastre AS 'IdArrastre',
+    VJ.id_cliente AS 'IdCliente',
+    VJ.id_chofer AS 'IdChofer',
+    VJ.id_carga AS 'IdCarga',
+    CL.denominacion AS 'Denominacion',
+    CL.razon_social AS 'RazonSocial',
+    CL.cuit AS 'CUIT',
+    CL.direccion AS 'Direccion',
+    CL.telefono AS 'Telefono',
+    CL.email AS 'EmailCliente',
+    concat(EMP.apellido, ', ', EMP.nombre) AS 'Chofer',
+    EMP.dni AS 'DNI',
+    EMP.email AS 'EmailChofer',
+    CH.numero_licencia AS 'NumeroLicencia',
+    TR.marca AS 'TMarca',
+    TR.patente AS 'TPatente',
+    TR.modelo AS 'TModelo',
+    ARR.marca AS 'AMarca',
+    ARR.patente AS 'APatente',
+    ARR.modelo AS 'AModelo',
+    CRG.peso_neto AS 'Peso',
+    CRG.hazard AS 'Hazard',
+    CRG.imo_class AS 'IMOClass',
+    CRG.imo_sclass AS 'IMOSClass',
+    CRG.reefer AS 'Reefer',
+    concat(CRG.temperatura, '°C') AS 'Temperatura',
+    TARR.descripcion AS 'TipoCarga'
+FROM 
+	presupuesto PRE 
+		JOIN viaje VJ ON PRE.id_viaje = VJ.id
+        JOIN cliente CL ON VJ.id_cliente = CL.id
+        JOIN vehiculo TR ON VJ.id_tractor = TR.id
+        JOIN vehiculo ARR ON VJ.id_arrastre = ARR.id
+        JOIN carga CRG ON VJ.id_carga = CRG.id
+        JOIN tipo_arrastre TARR ON CRG.id_tipo = TARR.id 
+        JOIN chofer CH ON VJ.id_chofer = CH.id_empleado
+        JOIN empleado EMP ON CH.id_empleado = EMP.id;
+
+CREATE VIEW Tractores
+AS
+SELECT 
+	VH.id 'IdTractor' , 
+    concat(VH.marca, ' - ', VH.modelo, ' - ', VH.patente) AS 'InfoTractor' 
+FROM 
+	vehiculo VH
+WHERE
+	VH.id NOT IN(SELECT id_tractor FROM Viaje WHERE estado <> 'Finalizado')
+		AND VH.id_tipo IS NULL 
+
+CREATE VIEW Arrastres
+AS
+SELECT 
+	VH.id 'IdArrastre' , 
+    concat(VH.marca, ' - ', VH.modelo, ' - ', VH.patente) AS 'InfoArrastre' 
+FROM 
+	vehiculo VH
+WHERE
+	VH.id NOT IN(SELECT id_arrastre FROM Viaje WHERE estado <> 'Finalizado')
+		AND VH.id_tipo IS NOT NULL 
+
+CREATE VIEW ChoferesDisponibles
+AS
+SELECT
+	CH.id_empleado AS 'IdChofer',
+	concat(EMP.apellido, ', ', EMP.nombre, ' (DNI: ', EMP.dni, ')') AS 'InfoChofer'
+FROM
+	chofer CH
+		JOIN empleado EMP ON CH.id_empleado = EMP.id
+WHERE
+	CH.numero_licencia IS NOT NULL
+		AND CH.id_empleado NOT IN(SELECT id_chofer FROM viaje WHERE estado <> 'Finalizado');
+    

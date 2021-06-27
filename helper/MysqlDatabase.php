@@ -24,6 +24,11 @@ class MysqlDatabase{
     }
 
     public function execute($sql){
-        return mysqli_query($this->connection, $sql);
+        mysqli_query($this->connection, $sql);
+        return mysqli_affected_rows($this->connection);
+    }
+
+    public function idGen(){
+        return $this->connection->insert_id;
     }
 }

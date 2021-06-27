@@ -1,6 +1,6 @@
 <?php
 
-class RegisterController
+class RegisterController extends SessionCheck
 {
     private $render;
     private $employeeModel;
@@ -8,6 +8,7 @@ class RegisterController
 
     public function __construct($employeeModel, $render)
     {
+        parent::__construct("NINGUNO");
         $this->employeeModel = $employeeModel;
         $this->render = $render;
     }

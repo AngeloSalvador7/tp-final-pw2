@@ -1,12 +1,13 @@
 <?php
 
-class LoginController
+class LoginController extends SessionCheck
 {
     private $render;
     private $employeeModel;
 
     public function __construct($render, $employeeModel)
     {
+        parent::__construct("NINGUNO");
         $this->render = $render;
         $this->employeeModel = $employeeModel;
     }
