@@ -62,6 +62,7 @@
                                     <label class="control-label" for="id_tipo">Tipo de arrastre</label>
                                     <select name="id_tipo" id="id_tipo" class="form-select" aria-label="Default select example">
                                         <option value="" selected disabled hidden>Elija Arrastre</option>
+                                        <option value="">Sin Arrastre</option>
                                         {{#arrastre}}
                                             <option value="{{tipo_id}}">{{tipo_descripcion}}</option>
                                         {{/arrastre}}

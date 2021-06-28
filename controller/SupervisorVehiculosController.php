@@ -38,6 +38,7 @@ class SupervisorVehiculosController extends SessionCheck
     {
         $data['usuario']=$_SESSION['usuario'];
         $data['vistaAgregarVehiculo']=true;
+        $data['arrastre']=$this->vehiculosModel->getArrastres();
         $data['vehiculo']=$this->vehiculosModel->getVehiculos();
 
         echo $this->render->render("view/vehiculoView.php", $data);
@@ -67,7 +68,7 @@ class SupervisorVehiculosController extends SessionCheck
     public function borrarVehiculo()
     {
         $this->vehiculosModel->dropVehiculo($_POST['borrar_id']);
-        $this->editarVehiculo();
+        header('location: http://localhost/vehiculos');
     }
 
     public function actualizarVehiculo()
