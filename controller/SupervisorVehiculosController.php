@@ -79,7 +79,7 @@ class SupervisorVehiculosController extends SessionCheck
     public function modificarVehiculo()
     {
         $data['vistaModificacionDeVehiculo']=true;
-        $data['arrastre']=$this->vehiculosModel->getArrastres();;
+        $data['arrastre']=$this->vehiculosModel->getArrastres();
         $data['vehiculo']=$this->vehiculosModel->getUnicoVehiculo($_POST['modificar_id']);
 
         echo $this->render->render("view/vehiculoView.php", $data);

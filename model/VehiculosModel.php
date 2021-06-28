@@ -4,14 +4,9 @@ class VehiculosModel
 {
     private $database;
 
-    public function __construct(\MysqlDatabase $database)
+    public function __construct($database)
     {
         $this->database = $database;
-    }
-
-    public function execute()
-    {
-        $this->loginUserView();
     }
 
     public function getVehiculos()
@@ -32,11 +27,11 @@ class VehiculosModel
     public function actualizarVehiculo($form)
     {
         return $this->database->execute("UPDATE vehiculo
-                                                SET marca=$form[marca],
-                                                    modelo=$form[modelo],
-                                                    patente=$form[patente],
-                                                    motor=$form[motor],
-                                                    chasis=$form[chasis],
+                                                SET marca='$form[marca]',
+                                                    modelo='$form[modelo]',
+                                                    patente='$form[patente]',
+                                                    motor='$form[motor]',
+                                                    chasis='$form[chasis]',
                                                     km_recorrido=$form[km_recorrido],
                                                     id_tipo=$form[id_tipo]
                                                 WHERE id=$form[modificar_id]");
@@ -49,7 +44,11 @@ class VehiculosModel
 
     public function agregarNuevoVehiculo($form)
     {
-        return $this->database->execute("insert into vehiculo (marca, modelo, patente, motor, chasis, km_recorrido, id_tipo)
-        values ($form[marca],$form[modelo],$form[patente],$form[motor],$form[chasis],$form[km_recorrido],$form[id_tipo])");
+//        echo "insert into vehiculo(marca, modelo, patente, motor, chasis, km_recorrido)
+//        values ('$form[marca]','$form[modelo]','$form[patente]','$form[motor]','$form[chasis]',$form[km_recorrido])";
+//        exit();
+
+        return $this->database->execute("insert into vehiculo(marca, modelo, patente, motor, chasis, km_recorrido)
+        values ('$form[marca]','$form[modelo]','$form[patente]','$form[motor]','$form[chasis]',$form[km_recorrido])");
     }
 }
