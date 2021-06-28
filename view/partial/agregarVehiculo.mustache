@@ -1,0 +1,85 @@
+<main class="container-fluid">
+
+    <div id="main" class="row text-white">
+
+        <div class="info col-12 col-sm-2 bg-dark p-0">
+
+            <div class="mt-3 me-3 text-white text-end">
+                <button class="btn btn-outline-gray rounded"></button>
+            </div>
+
+            <div class="text-center text-white mb-5">
+                <h3 class="mb-3"></h3>
+            </div>
+
+            <ul class="opciones">
+                <li><a class="text-white" href="vehiculos">Vehiculos</a></li>
+                <li><a class="text-white" href="vehiculos/agregarVehiculo">Agregar vehiculo</a></li>
+                <li><a class="text-white" href="vehiculos/editarVehiculo">Editar vehiculo</a></li>
+            </ul>
+
+        </div>
+
+        <div class="window col-12 col-sm-9 text-dark">
+            <h1 class="mt-2">Agregar un vehiculo</h1>
+            <hr/>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <form action="vehiculos/insertarVehiculo" method="POST">
+                                <div class="form-group mt-2">
+                                    <label class="control-label" for="marca">Marca</label>
+                                    <input id="marca" type="text" name="marca" class="form-control" placeholder="Ingrese la marca del vehiculo">
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    <label class="control-label" for="modelo">Modelo</label>
+                                    <input id="modelo" type="text" name="modelo" class="form-control" placeholder="Ingrese el modelo del vehiculo">
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    <label class="control-label" for="patente">Patente</label>
+                                    <input id="patente" type="text" name="patente" class="form-control" placeholder="Ingrese la patente del vehiculo">
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    <label class="control-label" for="motor">Motor</label>
+                                    <input id="motor" type="text" name="motor" class="form-control" placeholder="Ingrese el motor del vehiculo">
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    <label class="control-label" for="chasis">Chasis</label>
+                                    <input id="chasis" type="text" name="chasis" class="form-control" placeholder="Ingrese el chasis del vehiculo">
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    <label class="control-label" for="km_recorrido">Kilometraje</label>
+                                    <input id="km_recorrido" type="number" name="km_recorrido" class="form-control" placeholder="Ingrese el kilometraje del vehiculo">
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    <label class="control-label" for="id_tipo">Tipo de arrastre</label>
+                                    <select name="id_tipo" id="id_tipo" class="form-select" aria-label="Default select example">
+                                        <option value="" selected disabled hidden>Elija Arrastre</option>
+                                        {{#arrastre}}
+                                            <option value="{{tipo_id}}">{{tipo_descripcion}}</option>
+                                        {{/arrastre}}
+                                    </select>
+                                </div>
+
+                                <div class="form-group mt-2 d-flex justify-content-end" >
+                                    <button class="btn btn-success btn-block mt-4 mb-4">Crear</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>{{mensaje}}</h3>
+        </div>
+
+    </div>
+
+</main>
