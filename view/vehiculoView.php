@@ -20,18 +20,20 @@
     </div>
 </nav>
 
-{{#vistaCargas}}
-    {{>cargas}}
-{{/vistaCargas}}
+{{#vistaVehiculos}}
+    {{>vehiculos}}
+{{/vistaVehiculos}}
 
-{{#vistaAgregarCarga}}
-    {{>agregarCarga}}
-{{/vistaAgregarCarga}}
+{{#vistaAgregarVehiculo}}
+    {{>agregarVehiculo}}
+{{/vistaAgregarVehiculo}}
 
-{{#vistaModificarCarga}}
-    {{>editarCarga}}
-{{/vistaModificarCarga}}
-{{#vistaModificacionDeCarga}}
-    {{>modificarCarga}}
-{{/vistaModificacionDeCarga}}
+{{#vistaModificarVehiculo}}
+    {{>editarVehiculo}}
+{{/vistaModificarVehiculo}}
+
+{{#vistaModificacionDeVehiculo}}
+    {{>modificarVehiculo}}
+{{/vistaModificacionDeVehiculo}}
+
 {{> footer}}

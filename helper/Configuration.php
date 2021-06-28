@@ -10,6 +10,7 @@ include_once("model/HomeModel.php");
 include_once("model/EmpleadosModel.php");
 include_once("model/CargasModel.php");
 include_once("model/ProformasModel.php");
+include_once("model/VehiculosModel.php");
 
 /*CONTROLLER*/
 include_once("controller/EmpleadosController.php");
@@ -19,6 +20,7 @@ include_once("controller/HomeController.php");
 include_once("controller/LogoutController.php");
 include_once("controller/SupervisorCargaController.php");
 include_once("controller/ProformasController.php");
+include_once("controller/SupervisorVehiculosController.php");
 
 
 /*Other*/
@@ -60,6 +62,11 @@ class Configuration{
         return new ProformasModel($database);
     }
 
+    public function getVehiculosModel(){
+        $database = $this->getDatabase();
+        return new VehiculosModel($database);
+    }
+
     /*Controller*/
     public function getEmpleadosController(){
         $empleadosModel = $this->getEmpleadosModel();
@@ -90,6 +97,11 @@ class Configuration{
     public function getCargasController(){
         return new SupervisorCargaController($this->getRender(),$this->getCargasModel());
     }
+
+    public function getVehiculosController(){
+        return new SupervisorVehiculosController($this->getRender(),$this->getVehiculosModel());
+    }
+
     public function getRender(){
         return new Render('view/partial');
     }
