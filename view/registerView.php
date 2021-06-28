@@ -6,7 +6,7 @@
             <div class="panel-body">
                 <form action="register/registerEmployee" method="POST" >
                     <div class="form-group">
-                        <h2 class="mt-3">Create account</h2>
+                        <h2 class="mt-3">Registra tu Usuario</h2>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="dni">Numero de documento</label>
@@ -33,7 +33,7 @@
                         <input id="signupPassword" type="text"  class="form-control" name="clave">
                     </div>
                     <div class="form-group">
-                        <button  class="btn btn-info btn-block mt-4 mb-4">Create your account</button>
+                        <button  class="btn btn-info btn-block mt-4 mb-4">Registrarse</button>
                     </div>
                 </form>
             </div>

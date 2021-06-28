@@ -113,12 +113,9 @@ class ProformasModel{
         $updViaje = "UPDATE viaje SET origen = '$datos[Origen]', destino = '$datos[Destino]', eta = '$datos[ETA]', etd = '$datos[ETD]', estado = '$datos[Estado]', km_estimado = $datos[Kilometros],
             combustible_estimado = $datos[Combustible], id_chofer = $datos[Chofer], id_tractor = $datos[Tractor], id_arrastre = $datos[Arrastre], id_carga = $datos[Carga], id_cliente = $datos[Cliente] WHERE id = $datos[Proforma]";
 
-        $this->database->execute($updViaje);
-
         $updPresupuesto = "UPDATE presupuesto SET costo_peaje_estimado = $datos[Peaje], costo_viaticos_estimado = $datos[Viaticos], costo_hospedaje_estimado = $datos[Hospedaje], extra_estimado = $datos[Extras]";
-        $this->database->execute($updPresupuesto);
-
-        return true;
+        
+        return $this->database->execute($updViaje) > 0 || $this->database->execute($updPresupuesto) > 0;
     }
 
     private function validar(array $datos){
