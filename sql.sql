@@ -29,3 +29,6 @@ VALUES (1, 'test', 'test', '19990605', '19990607', '19990605', '19990607', 'Pend
 
 INSERT INTO `transporte`.`presupuesto` (`id`, `id_viaje`, `costo_peaje_estimado`, `costo_viaticos_estimado`, `costo_hospedaje_estimado`, `extra_estimado`)
 VALUES (1, 1, 10000, 5000, 500, 30);
+
+INSERT INTO empleado(dni, fecha_nacimiento, nombre, apellido, email, clave, id_rol) 
+VALUES (3398945, "1978-12-02", "Pablo", "Oliva", "olivap@gmail.com", "oliva", null);

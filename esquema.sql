@@ -41,7 +41,7 @@ create table vehiculo(
                          motor varchar(50) not null,
                          chasis varchar(50) not null,
                          km_recorrido int not null,
-                         id_tipo int not null,
+                         id_tipo int null,
                          foreign key(id_tipo) references tipo_arrastre(id),
                          primary key (id)
 );
