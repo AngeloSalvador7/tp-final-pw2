@@ -58,7 +58,6 @@ class EmpleadosModel
                                                             id_rol = '$form[rol]',
                                                             clave =  '$form[clave]'
                                                             where id=$form[id_empleado]");
-
     }
 
     public function getEmpleadosById($id){

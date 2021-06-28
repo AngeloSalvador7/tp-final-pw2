@@ -69,9 +69,8 @@
                                     <div class="form-group">
                                         <label class="control-label" for="">Rol</label><br>
                                         <select class="form-select" name="rol" id="lista">
-                                            <option value="" selected disabled hidden>Elija Rol</option>
-                                            <option value="{{id_rol}}" selected hidden>{{descripcion}}</option>
-                                                    {{#roles}}
+                                            <option value="{{id_tipo}}" selected hidden>{{descripcion}}</option>
+                                            {{#roles}}
                                             <option value="{{rol}}">{{descripcion}}</option>
                                             {{/roles}}
                                         </select>

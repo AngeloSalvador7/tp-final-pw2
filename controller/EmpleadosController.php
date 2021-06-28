@@ -15,8 +15,10 @@ class EmpleadosController
     {
         $this->validarSesion();
         $datos['empleados'] = $this->empleadosModel->getEmpleados();
-        if(isset($_POST['msg']))
-            $datos['mensaje'] = $_POST['msg'];
+        if(isset($_SESSION['msg'])) {
+            $datos['mensaje'] = $_SESSION['msg'];
+            unset($_SESSION['msg']);
+        }
         $datos['empleadosSinRol'] = true;
 
         echo $this->render->render("view/empleados.php", $datos);
@@ -80,9 +82,9 @@ class EmpleadosController
     public function guardarCambios(){
         $this->validarSesion();
         if($this->empleadosModel->actualizarEmpleado($_POST)){
-            $_POST['msg'] = "Se actualizaron los datos";
+            $_SESSION['msg'] = "Se actualizaron los datos";
         }else{
-            $_POST['msg'] = "No se actualizaron los datos";
+            $_SESSION['msg'] = "No se actualizaron los datos";
         }
         $this->execute();
     }
