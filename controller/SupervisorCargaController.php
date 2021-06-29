@@ -71,7 +71,7 @@ class SupervisorCargaController extends SessionCheck
         $this->editarCarga();
     }
 
-    public function modificarCarga()
+    public function modificarCliente()
     {
         $data['vistaModificacionDeCarga']=true;
         $data['arrastre']=$this->cargasModel->getArrastres();;

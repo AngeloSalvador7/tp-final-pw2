@@ -1,6 +1,7 @@
 <?php
 
-class ProformasController extends SessionCheck
+class
+ProformasController extends SessionCheck
 {
 
     private $render;

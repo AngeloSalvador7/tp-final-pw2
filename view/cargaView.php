@@ -17,26 +17,28 @@
                 <a class="nav-link" href="clientes">Clientes</a>
             </li>
             <li class="nav-item px-3">
+                <a class="nav-link" href="empleados">Empleados</a>
+            </li>
+            <li class="nav-item px-3">
                 <a class="nav-link" href="#">Estadisticas</a>
             </li>
         </ul>
     </div>
 </nav>
 
-{{#vistaClientes}}
-    {{>clientes}}
-{{/vistaClientes}}
+{{#vistaCargas}}
+{{>cargas}}
+{{/vistaCargas}}
 
-{{#vistaAgregarCliente}}
-    {{>agregarCliente}}
-{{/vistaAgregarCliente}}
+{{#vistaAgregarCarga}}
+{{>agregarCarga}}
+{{/vistaAgregarCarga}}
 
-{{#vistaModificarCliente}}
-    {{>editarCliente}}
-{{/vistaModificarCliente}}
-
-{{#vistaModificacionDeCliente}}
-    {{>modificarCliente}}
-{{/vistaModificacionDeCliente}}
+{{#vistaModificarCarga}}
+{{>editarCarga}}
+{{/vistaModificarCarga}}
+{{#vistaModificacionDeCarga}}
+{{>modificarCarga}}
+{{/vistaModificacionDeCarga}}
 
 {{> footer}}

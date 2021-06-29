@@ -9,10 +9,6 @@ class CargasModel
         $this->database = $database;
     }
 
-    public function execute()
-    {
-        $this->loginUserView();
-    }
 
     public function getCargas()
     {
@@ -53,7 +49,5 @@ class CargasModel
         VALUES  ($form[peso_neto],$form[hazard],$form[clase_IMO],$form[sub_clase_IMO],$form[reefer],$form[temperatura],$form[id_tipo])");
     }
 
-
-//($form[peso_neto],'$form[hazard]','$form[clase_IMO]','$form[sub_clase_IMO]','$form[reefer]','$form[temperatura],'$form[id_tipo])"
 
 }

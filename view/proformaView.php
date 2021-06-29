@@ -11,10 +11,13 @@
                 <a class="nav-link" href="cargas">Cargas</a>
             </li>
             <li class="nav-item px-3">
+                <a class="nav-link" href="vehiculos">Vehiculos</a>
+            </li>
+            <li class="nav-item px-3">
                 <a class="nav-link" href="clientes">Clientes</a>
             </li>
             <li class="nav-item px-3">
-                <a class="nav-link" href="vehiculos">Vehiculos</a>
+                <a class="nav-link" href="empleados">Empleados</a>
             </li>
             <li class="nav-item px-3">
                 <a class="nav-link" href="#">Estadisticas</a>

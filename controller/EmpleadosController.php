@@ -39,7 +39,7 @@ class EmpleadosController extends SessionCheck
         echo $this->render->render("view/empleadosView.php", $datos);
     }
 
-    public function asignarRol(){
+        public function asignarRol(){
         if (!empty($_POST['rol']) && !empty($_POST['empleado'])) {
             if ($this->empleadosModel->asignarRol($_POST)) {
                 $_SESSION['mensaje'] = "Nuevo usuario validado";
@@ -67,13 +67,6 @@ class EmpleadosController extends SessionCheck
 
         echo $this->render->render("view/editarEmpleados.php", $datos);
     }
-
-   /* public function editarEmpleadosSinRol(){
-        $datos['empleados'] = $this->empleadosModel->getEmpleadosByIdSinRol($_POST['editar_id']);
-        $datos['roles'] = $this->empleadosModel->getRol();
-
-        echo $this->render->render("view/editarEmpleadosSinRol.php", $datos);
-    }*/
 
     public function guardarCambios(){
         if($this->empleadosModel->actualizarEmpleado($_POST)){
