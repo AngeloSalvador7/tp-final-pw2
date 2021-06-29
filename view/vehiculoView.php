@@ -11,6 +11,9 @@
                 <a class="nav-link" href="cargas">Cargas</a>
             </li>
             <li class="nav-item px-3">
+                <a class="nav-link" href="clientes">Clientes</a>
+            </li>
+            <li class="nav-item px-3">
                 <a class="nav-link" href="vehiculos">Vehiculos</a>
             </li>
             <li class="nav-item px-3">

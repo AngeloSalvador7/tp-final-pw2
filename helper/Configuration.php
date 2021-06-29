@@ -11,6 +11,7 @@ include_once("model/EmpleadosModel.php");
 include_once("model/CargasModel.php");
 include_once("model/ProformasModel.php");
 include_once("model/VehiculosModel.php");
+include_once("model/ClienteModel.php");
 
 /*CONTROLLER*/
 include_once("controller/EmpleadosController.php");
@@ -21,6 +22,7 @@ include_once("controller/LogoutController.php");
 include_once("controller/SupervisorCargaController.php");
 include_once("controller/ProformasController.php");
 include_once("controller/SupervisorVehiculosController.php");
+include_once("controller/SupervisorClientesController.php");
 
 
 /*Other*/
@@ -67,6 +69,11 @@ class Configuration{
         return new VehiculosModel($database);
     }
 
+    public function getClientesModel(){
+        $database=$this->getDatabase();
+        return new ClienteModel($database);
+    }
+
     /*Controller*/
     public function getEmpleadosController(){
         $empleadosModel = $this->getEmpleadosModel();
@@ -79,6 +86,10 @@ class Configuration{
 
     public function getProformasController(){
         return new ProformasController($this->getRender(), $this->getProformasModel());
+    }
+
+    public function getClientesController(){
+        return new SupervisorClientesController($this->getRender(),$this->getClientesModel());
     }
 
     public function getLogoutController(){

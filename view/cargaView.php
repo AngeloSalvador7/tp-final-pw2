@@ -14,24 +14,29 @@
                 <a class="nav-link" href="vehiculos">Vehiculos</a>
             </li>
             <li class="nav-item px-3">
+                <a class="nav-link" href="clientes">Clientes</a>
+            </li>
+            <li class="nav-item px-3">
                 <a class="nav-link" href="#">Estadisticas</a>
             </li>
         </ul>
     </div>
 </nav>
 
-{{#vistaCargas}}
-    {{>cargas}}
-{{/vistaCargas}}
+{{#vistaClientes}}
+    {{>clientes}}
+{{/vistaClientes}}
 
-{{#vistaAgregarCarga}}
-    {{>agregarCarga}}
-{{/vistaAgregarCarga}}
+{{#vistaAgregarCliente}}
+    {{>agregarCliente}}
+{{/vistaAgregarCliente}}
 
-{{#vistaModificarCarga}}
-    {{>editarCarga}}
-{{/vistaModificarCarga}}
-{{#vistaModificacionDeCarga}}
-    {{>modificarCarga}}
-{{/vistaModificacionDeCarga}}
+{{#vistaModificarCliente}}
+    {{>editarCliente}}
+{{/vistaModificarCliente}}
+
+{{#vistaModificacionDeCliente}}
+    {{>modificarCliente}}
+{{/vistaModificacionDeCliente}}
+
 {{> footer}}
