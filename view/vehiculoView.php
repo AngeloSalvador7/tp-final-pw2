@@ -17,9 +17,6 @@
                 <a class="nav-link" href="clientes">Clientes</a>
             </li>
             <li class="nav-item px-3">
-                <a class="nav-link" href="empleados">Empleados</a>
-            </li>
-            <li class="nav-item px-3">
                 <a class="nav-link" href="#">Estadisticas</a>
             </li>
         </ul>
