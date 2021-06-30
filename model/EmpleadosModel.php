@@ -11,12 +11,12 @@ class EmpleadosModel
 
     public function getEmpleados()
     {
-        return $this->database->query("SELECT e.id, e.dni, e.fecha_nacimiento, e.nombre, e.apellido, e.email, r.id as id_tipo, r.descripcion FROM empleado e join rol r ON e.id_rol = r.id where e.id_rol IS NOT NULL");
+        return $this->database->query("SELECT e.id, e.dni, e.fecha_nacimiento, e.nombre, e.apellido, e.email, r.id as id_tipo, r.descripcion FROM empleado e join rol r ON e.id_rol = r.id where vigente=1 AND e.id_rol IS NOT NULL");
     }
 
     public function getEmpleadosSinRol()
     {
-        return $this->database->query("SELECT * FROM empleado e where e.id_rol IS NULL");
+        return $this->database->query("SELECT * FROM empleado e where vigente=1 AND e.id_rol IS NULL");
     }
 
     public function getRol()
@@ -26,27 +26,27 @@ class EmpleadosModel
 
     public function asignarRol($datos)
     {
-        return $this->database->execute("UPDATE empleado SET id_rol = $datos[rol] where id = $datos[empleado]");
+        return $this->database->execute("UPDATE empleado SET id_rol = $datos[rol] where vigente=1 AND id = $datos[empleado]");
     }
 
     public function addEmployee($form)
     {
-        return $this->database->execute("INSERT INTO empleado(dni,fecha_nacimiento,nombre,apellido,email,clave) VALUES ($form[dni],'$form[fecha_nacimiento]','$form[nombre]','$form[apellido]','$form[email]','$form[clave]')");
+        return $this->database->execute("INSERT INTO empleado(dni,fecha_nacimiento,nombre,apellido,email,clave,vigente) VALUES ($form[dni],'$form[fecha_nacimiento]','$form[nombre]','$form[apellido]','$form[email]','$form[clave]',1)");
     }
 
     public function loginEmployee($form)
     {
-        return $this->database->query("SELECT * FROM empleado e LEFT JOIN rol r ON e.id_rol = r.id where email='$form[email]' and clave='$form[clave]'");
+        return $this->database->query("SELECT * FROM empleado e LEFT JOIN rol r ON e.id_rol = r.id where vigente=1 AND email='$form[email]' and clave='$form[clave]'");
     }
 
     public function eliminarEmpleado($dato)
     {
-        return $this->database->execute("DELETE FROM empleado e where e.id = $dato");
+        return $this->database->execute("UPDATE empleado e SET e.vigente = 0 where e.id = $dato");
     }
 
     public function getEditarEmpleados($dato)
     {
-        return $this->database->query("SELECT * FROM empleado where id = $dato");
+        return $this->database->query("SELECT * FROM empleado where vigente=1 AND id = $dato");
     }
 
     public function actualizarEmpleado($form){
@@ -57,10 +57,10 @@ class EmpleadosModel
                                                             email = '$form[email]',
                                                             id_rol = '$form[rol]',
                                                             clave =  '$form[clave]'
-                                                            where id=$form[id_empleado]");
+                                                            where vigente=1 AND id=$form[id_empleado]");
     }
 
     public function getEmpleadosById($id){
-        return $this->database->query("SELECT e.id, e.dni, e.fecha_nacimiento, e.nombre, e.apellido, e.email, e.clave, r.id as id_tipo, r.descripcion FROM empleado e join rol r ON e.id_rol = r.id where e.id = $id");
+        return $this->database->query("SELECT e.id, e.dni, e.fecha_nacimiento, e.nombre, e.apellido, e.email, e.clave, r.id as id_tipo, r.descripcion FROM empleado e join rol r ON e.id_rol = r.id where e.vigente = 1 AND e.id = $id");
     }
 }
