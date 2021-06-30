@@ -16,4 +16,4 @@ Insert  into tipo_arrastre(descripcion) values ('tanque'),('acoplado'),('cistern
 INSERT INTO `transporte`.`chofer` (`id_empleado`, `numero_licencia`) VALUES (3, 111111);
 
 INSERT INTO empleado(dni, fecha_nacimiento, nombre, apellido, email, clave, id_rol) 
-VALUES (3398945, "1978-12-02", "Pablo", "Oliva", "olivap@gmail.com", "oliva", null);
+VALUES (3398945, "1978-12-02", "Pablo", "Oliva", "olivap@gmail.com", "oliva", null, 1);

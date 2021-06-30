@@ -36,7 +36,7 @@ class CargasModel
                                                     temperatura=$form[temperatura],
                                                     vigente=1,
                                                     id_tipo=$form[id_tipo]
-                                                WHERE  id=$form[modificar_id]");
+                                                WHERE  id=$form[modificar_id] AND vigente = 1");
     }
 
     public function dropCarga($id)

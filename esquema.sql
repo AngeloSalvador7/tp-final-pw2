@@ -17,7 +17,7 @@ create table empleado(
 		 clave varchar(50) not null,
 		 id_rol int,
          vigente bit(1) not null,
-         hash VARCHAR(255) null,
+         hashcode VARCHAR(255) null,
 		 primary key (id),
 		 foreign key(id_rol) references rol(id)
 );
