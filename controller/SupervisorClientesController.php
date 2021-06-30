@@ -32,7 +32,8 @@ class SupervisorClientesController extends SessionCheck
     public function borrarCliente()
     {
         $this->clienteModel->dropCliente($_POST['borrar_id']);
-        header('location: http://localhost/clientes');
+        header('location: editarCliente');
+        exit();
     }
 
     public function agregarCliente()
@@ -73,7 +74,7 @@ class SupervisorClientesController extends SessionCheck
     public function actualizarCliente()
     {
         $this->clienteModel->modificarCliente($_POST);
-        header('location: http://localhost/clientes');
+        header('location: editarCliente');
         exit();
     }
 }

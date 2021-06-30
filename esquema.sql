@@ -9,7 +9,7 @@ create table rol(
 
 create table empleado(
 		 id int auto_increment,
-		 dni int not null unique,
+		 dni bigint not null unique,
 		 fecha_nacimiento date not null,
 		 nombre varchar(50) not null,
 		 apellido varchar(50) not null,
@@ -68,7 +68,7 @@ create table carga(
 create table cliente(
 		id int auto_increment not null,
 		denominacion varchar(50) not null,
-		cuit int not null,
+		cuit bigint not null,
 		direccion varchar(50) null,
 		telefono varchar(50) null,
 		email varchar(50) null,
@@ -88,12 +88,14 @@ create table viaje(
 		  estado varchar(50) not null,
 		  km_real int null,
 		  combustible_real int null,
+          latitud double null,
+          longitud double null,
 		  id_chofer int not null,
 		  id_tractor int not null,
 		  id_arrastre int not null,
 		  id_carga int not null,
 		  id_cliente int not null,
-		  foreign key(id_chofer) references chofer(id_empleado),
+		  foreign key(id_chofer) references chofer(id),
 		  foreign key(id_tractor) references vehiculo(id),
 		  foreign key(id_arrastre) references vehiculo(id),
 		  foreign key(id_carga) references carga(id),
@@ -174,7 +176,6 @@ SELECT
 	VJ.destino AS 'Destino',
 	VJ.etd AS  'ETD',
 	VJ.eta AS 'ETA',
-	VJ.estado AS 'Estado',
 	VJ.id_tractor AS 'IdTractor',
 	VJ.id_arrastre AS 'IdArrastre',
 	VJ.id_cliente AS 'IdCliente',
@@ -242,7 +243,7 @@ WHERE
 CREATE VIEW ChoferesDisponibles
 AS
 SELECT
-    CH.id_empleado AS 'IdChofer',
+    CH.id AS 'IdChofer',
         concat(EMP.apellido, ', ', EMP.nombre, ' (DNI: ', EMP.dni, ')') AS 'InfoChofer'
 FROM
     chofer CH
@@ -251,3 +252,14 @@ WHERE
     CH.numero_licencia IS NOT NULL
 	AND CH.id NOT IN(SELECT id_chofer FROM viaje WHERE estado NOT IN ('Finalizado', 'Cancelado'))
     AND EMP.vigente = 1;
+    
+CREATE VIEW CargasDisponibles
+AS
+SELECT 
+	id,
+    concat(id, ': ' ,peso_neto,'kg - ', descripcion) AS 'InfoCarga'
+FROM 
+	carga 
+WHERE 
+	id NOT IN(SELECT id_carga FROM viaje WHERE estado NOT IN ('Finalizado', 'Cancelado'))
+        AND vigente = 1;
