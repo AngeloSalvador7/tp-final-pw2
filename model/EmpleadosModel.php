@@ -9,8 +9,7 @@ class EmpleadosModel
         $this->database = $database;
     }
 
-    public function getEmpleados()
-    {
+    public function getEmpleados(){
         return $this->database->query("SELECT e.id, e.dni, e.fecha_nacimiento, e.nombre, e.apellido, e.email, r.id as id_tipo, r.descripcion FROM empleado e join rol r ON e.id_rol = r.id where e.id_rol IS NOT NULL");
     }
 
@@ -36,7 +35,7 @@ class EmpleadosModel
 
     public function loginEmployee($form)
     {
-        return $this->database->query("SELECT * FROM empleado e LEFT JOIN rol r ON e.id_rol = r.id where email='$form[email]' and clave='$form[clave]'");
+        return $this->database->query("SELECT e.id, e.dni, e.fecha_nacimiento, e.nombre, e.apellido, e.email, e.clave, r.id as id_rol, r.descripcion FROM empleado e LEFT JOIN rol r ON e.id_rol = r.id  where email='$form[email]' and clave='$form[clave]'");
     }
 
     public function eliminarEmpleado($dato)
@@ -63,4 +62,5 @@ class EmpleadosModel
     public function getEmpleadosById($id){
         return $this->database->query("SELECT e.id, e.dni, e.fecha_nacimiento, e.nombre, e.apellido, e.email, e.clave, r.id as id_tipo, r.descripcion FROM empleado e join rol r ON e.id_rol = r.id where e.id = $id");
     }
+
 }

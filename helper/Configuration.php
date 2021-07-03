@@ -7,12 +7,14 @@ include_once("helper/SessionCheck.php");
 
 /*MODEL*/
 include_once("model/HomeModel.php");
+include_once("model/ChoferModel.php");
 include_once("model/EmpleadosModel.php");
 include_once("model/CargasModel.php");
 include_once("model/ProformasModel.php");
 include_once("model/VehiculosModel.php");
 
 /*CONTROLLER*/
+include_once("controller/ChoferController.php");
 include_once("controller/EmpleadosController.php");
 include_once("controller/RegisterController.php");
 include_once("controller/LoginController.php");
@@ -52,6 +54,11 @@ class Configuration{
         return new CargasModel($database);
     }
 
+    public function getChoferModel(){
+        $database = $this->getDatabase();
+        return new ChoferModel($database);
+    }
+
     public function getEmpleadosModel(){
         $database = $this->getDatabase();
         return new EmpleadosModel($database);
@@ -71,6 +78,11 @@ class Configuration{
     public function getEmpleadosController(){
         $empleadosModel = $this->getEmpleadosModel();
         return new EmpleadosController($this->getRender(), $empleadosModel);
+    }
+
+    public function getChoferController(){
+        $choferModel = $this->getChoferModel();
+        return new ChoferController($this->getRender(), $choferModel);
     }
 
     public function getHomeController(){
