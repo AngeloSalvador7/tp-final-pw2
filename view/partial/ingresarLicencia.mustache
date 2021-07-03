@@ -1,0 +1,10 @@
+<div class="alert alert-success" role="alert">
+   <form name="licencia" action="chofer/agregarLicencia" method="post">
+       <h4>Ingrese su licencia para poder realizar viajes</h4>
+       <label class="control-label" for="signupLicencia">Numero de licencia</label>
+       <input id="signupLicencia" type="number" placeholder="ingrese licencia" class="form-control" name="licencia"><br>
+       <button class="btn btn-outline-secondary m-1"  type="submit" name="id_chofer" value="{{completarLicencia}}">Agregar</button>
+   </form>
+</div>
+
+<h3>{{mensaje}}</h3>
