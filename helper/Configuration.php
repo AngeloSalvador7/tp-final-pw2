@@ -4,6 +4,7 @@ include_once("helper/MysqlDatabase.php");
 include_once("helper/Render.php");
 include_once("helper/UrlHelper.php");
 include_once("helper/SessionCheck.php");
+include_once("helper/Correo.php");
 
 /*MODEL*/
 include_once("model/HomeModel.php");
@@ -29,6 +30,7 @@ include_once("controller/SupervisorClientesController.php");
 
 /*Other*/
 include_once('third-party/mustache/src/Mustache/Autoloader.php');
+include_once('third-party/Globales.php');
 include_once("Router.php");
 
 class Configuration
@@ -120,8 +122,7 @@ class Configuration
 
     public function getRegisterController()
     {
-        $usuario = $this->getEmpleadosModel();
-        return new RegisterController($usuario, $this->getRender());
+        return new RegisterController($this->getEmpleadosModel(), $this->getRender());
     }
 
     public function getLoginController()

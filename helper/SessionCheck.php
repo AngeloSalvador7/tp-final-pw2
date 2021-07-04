@@ -1,27 +1,22 @@
-<?php 
+<?php
 
-class SessionCheck{
+class SessionCheck
+{
 
-    private $UrlsExcluidas = [
-        "/", "/register", "/register/registerEmployee", "/login/validateEmployee"
-    ];
+    private $UrlsExcluidas = '/((\/register|\/login).*$)|\/$/m';
 
 
-    public function __construct($rol = null) {
+    public function __construct($rol = null)
+    {
 
-        if(!isset($_SESSION['usuario']) && !in_array($_SERVER['REQUEST_URI'], $this->UrlsExcluidas)) {
+        if (!isset($_SESSION['usuario']) && preg_match($this->UrlsExcluidas, $_SERVER['REQUEST_URI']) == 0) {
             header("location: http://localhost/");
             exit();
         }
 
-        if(isset($rol) && isset($_SESSION['usuario']['descripcion']) && $_SESSION['usuario']['descripcion'] != $rol){
+        if (isset($rol) && isset($_SESSION['usuario']['descripcion']) && $_SESSION['usuario']['descripcion'] != $rol) {
             header("location: http://localhost/home");
             exit();
         }
-
     }
-
-
 }
-
-?>
