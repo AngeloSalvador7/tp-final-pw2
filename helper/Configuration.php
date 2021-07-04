@@ -15,7 +15,7 @@ include_once("model/VehiculosModel.php");
 include_once("model/ClienteModel.php");
 include_once("model/ChoferModel.php");
 include_once("model/ViajeModel.php");
-include_once ("model/FacturaModel.php");
+include_once("model/FacturaModel.php");
 
 /*CONTROLLER*/
 include_once("controller/ChoferController.php");
@@ -35,13 +35,16 @@ include_once('third-party/mustache/src/Mustache/Autoloader.php');
 include_once("Router.php");
 include_once('third-party/phpqrcode/qrlib.php');
 
-class Configuration{
+class Configuration
+{
 
-    private function getConfig(){
+    private function getConfig()
+    {
         return parse_ini_file("config/config.ini");
     }
 
-    private function getDatabase(){
+    private function getDatabase()
+    {
         $config = $this->getConfig();
         return new MysqlDatabase(
             $config["servername"],
@@ -52,30 +55,37 @@ class Configuration{
     }
 
     /*Model*/
-    public function getHomeModel(){
-            return new HomeModel($this->getDatabase());
+    public function getHomeModel()
+    {
+        return new HomeModel($this->getDatabase());
     }
-    public function getCargasModel(){
+
+    public function getCargasModel()
+    {
         $database = $this->getDatabase();
         return new CargasModel($database);
     }
 
-    public function getChoferModel(){
+    public function getChoferModel()
+    {
         $database = $this->getDatabase();
         return new ChoferModel($database);
     }
 
-    public function getEmpleadosModel(){
+    public function getEmpleadosModel()
+    {
         $database = $this->getDatabase();
         return new EmpleadosModel($database);
     }
 
-    public function getProformasModel(){
+    public function getProformasModel()
+    {
         $database = $this->getDatabase();
         return new ProformasModel($database);
     }
 
-    public function getVehiculosModel(){
+    public function getVehiculosModel()
+    {
         $database = $this->getDatabase();
         return new VehiculosModel($database);
     }
@@ -86,79 +96,83 @@ class Configuration{
         return new ClienteModel($database);
     }
 
-   public function getChoferModel(){
-
-       $database=$this->getDatabase();
-       return new ChoferModel($database);
-        }
-
-        public function  getViajeModel(){
-        $database=$this->getDatabase();
+    public function getViajeModel()
+    {
+        $database = $this->getDatabase();
         return new ViajeModel($database);
-        }
+    }
 
-        public function getFacturaModel(){
-        $database=$this->getDatabase();
+    public function getFacturaModel()
+    {
+        $database = $this->getDatabase();
         return new FacturaModel($database);
-        }
+    }
 
     /*Controller*/
-    public function getEmpleadosController(){
+    public function getEmpleadosController()
+    {
         $empleadosModel = $this->getEmpleadosModel();
         return new EmpleadosController($this->getRender(), $empleadosModel);
     }
 
-    public function getChoferController(){
-        $choferModel = $this->getChoferModel();
-        return new ChoferController($this->getRender(), $choferModel);
+    public function getHomeController()
+    {
+        return new HomeController($this->getRender(), $this->getHomeModel());
     }
 
-    public function getHomeController(){
-        return new HomeController($this->getRender(),$this->getHomeModel());
-    }
-
-    public function getProformasController(){
+    public function getProformasController()
+    {
         return new ProformasController($this->getRender(), $this->getProformasModel());
     }
 
-    public function getClientesController(){
-        return new SupervisorClientesController($this->getRender(),$this->getClientesModel());
+    public function getClientesController()
+    {
+        return new SupervisorClientesController($this->getRender(), $this->getClientesModel());
     }
 
-    public function getLogoutController(){
+    public function getLogoutController()
+    {
         return new LogoutController($this->getRender());
     }
 
-    public function getRegisterController(){
-        $usuario=$this->getEmpleadosModel();
-        return new RegisterController($usuario,$this->getRender());
+    public function getRegisterController()
+    {
+        $usuario = $this->getEmpleadosModel();
+        return new RegisterController($usuario, $this->getRender());
     }
 
-    public function getLoginController(){
-        return new LoginController($this->getRender(),$this->getEmpleadosModel());
+    public function getLoginController()
+    {
+        return new LoginController($this->getRender(), $this->getEmpleadosModel());
     }
 
-    public function getCargasController(){
-        return new SupervisorCargaController($this->getRender(),$this->getCargasModel());
+    public function getCargasController()
+    {
+        return new SupervisorCargaController($this->getRender(), $this->getCargasModel());
     }
 
-    public function getVehiculosController(){
-        return new SupervisorVehiculosController($this->getRender(),$this->getVehiculosModel());
+    public function getVehiculosController()
+    {
+        return new SupervisorVehiculosController($this->getRender(), $this->getVehiculosModel());
     }
 
-    public function getChoferController(){
-        return new ChoferController($this->getRender(),$this->getChoferModel(),$this->getVehiculosModel(),$this->getViajeModel(),$this->getFacturaModel());
+    public function getChoferController()
+    {
+        return new ChoferController($this->getRender(), $this->getChoferModel(), $this->getVehiculosModel(), $this->getViajeModel(), $this->getFacturaModel());
     }
 
-    public function getRender(){
+    public function getRender()
+    {
         return new Render('view/partial');
     }
 
-    public function getRouter(){
+    public function getRouter()
+    {
         return new Router($this);
     }
 
-    public function getUrlHelper(){
+    public function getUrlHelper()
+    {
         return new UrlHelper();
     }
 }

@@ -91,11 +91,12 @@ class ChoferController extends SessionCheck
             exit();
         }
         //SACAR COMENTARIOS CAUNDO SE PRUEBE
-//        $viajeObtenido = $this->viajeModel->consultarViaje($_GET['id_viaje']);
-//        if ($viajeObtenido == null || $viajeObtenido['id_chofer'] == $_SESSION['usuario']  ['id']) {
-//            header('location: /chofer');
-//            exit();
-//        }
+        $viajeObtenido = $this->viajeModel->consultarViaje($_GET['id_viaje']);
+        if ($viajeObtenido == null || $viajeObtenido['id_chofer'] == $_SESSION['usuario']['id']) {
+            header('location: /chofer');
+            exit();
+        }
+        $this->viajeModel->iniciarViaje($_GET['id_viaje']);
         $datos['vistaActualizarDatosViaje'] = true;
         $datos['id_viaje'] = $_GET['id_viaje'];
         echo $this->render->render("view/homeChoferView.php", $datos);

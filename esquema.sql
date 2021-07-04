@@ -86,8 +86,8 @@ create table viaje(
 		  etd date not null,
 		  fecha_llegada date null,
 		  estado varchar(50) not null,
-		  km_real int null,
-		  combustible_real int null,
+		  km_real int default 0,
+		  combustible_real int default 0,
           latitud double null,
           longitud double null,
 		  id_chofer int not null,
@@ -106,10 +106,10 @@ create table viaje(
 create table factura(
 			id  int auto_increment not null,
 			id_viaje int not null,
-			costo_peaje double not null,
-			costo_viaticos double not null,
-			costo_hospedaje double not null,
-			extra double not null,
+			costo_peaje double default 0.00,
+			costo_viaticos double default 0.00,
+			costo_hospedaje double default 0.00,
+			extra double default 0.00,
 			foreign key(id_viaje) references viaje(id),
 			primary key (id)
 );
@@ -121,6 +121,7 @@ create table presupuesto(
 			costo_viaticos_estimado double not null,
 			costo_hospedaje_estimado double not null,
             km_estimado int not null,
+			combustible_estimado int not null,
             tarifa double not null,
 			extra_estimado double not null,
 			foreign key(id_viaje) references viaje(id),
@@ -146,6 +147,7 @@ SELECT
     PRE.id AS 'Proforma',
 	VJ.etd AS  'ETD',
 	VJ.eta AS 'ETA',
+    VJ.estado,
 	CG.descripcion AS 'Carga',
 	CL.razon_social AS 'Cliente',
 	concat(EMP.apellido, ', ', EMP.nombre) AS 'Chofer',
@@ -262,3 +264,58 @@ FROM
 WHERE 
 	id NOT IN(SELECT id_carga FROM viaje WHERE estado NOT IN ('Finalizado', 'Cancelado'))
         AND vigente = 1;
+        
+CREATE VIEW ViajesResumen
+AS
+SELECT
+    VJ.id AS 'Viaje',
+    VJ.estado AS 'Estado',
+    CASE
+    WHEN VJ.fecha_carga IS NULL
+		THEN '-- / -- / --'
+		ELSE VJ.fecha_carga END AS  'FechaCarga',
+	CASE
+    WHEN VJ.fecha_llegada IS NULL
+		THEN '-- / -- / --'
+		ELSE VJ.fecha_llegada END AS  'FechaLlegada',
+	CASE
+    WHEN VJ.latitud IS NULL AND VJ.longitud IS NULL
+		THEN 'N/A'
+		ELSE concat(VJ.latitud, 'LAT - ', VJ.longitud, 'LNG') END AS 'Posicion',
+	FC.costo_hospedaje + FC.costo_peaje + FC.costo_viaticos + FC.extra AS 'Gastos'
+FROM
+    viaje VJ
+		JOIN factura FC ON VJ.id = FC.id_viaje
+        JOIN presupuesto PRE ON VJ.id = PRE.id_viaje;
+        
+CREATE VIEW Comparacion
+AS
+SELECT
+	VJ.id,
+	PRE.costo_peaje_estimado,
+    PRE.costo_viaticos_estimado,
+    PRE.costo_hospedaje_estimado,
+    PRE.extra_estimado,
+    PRE.tarifa,
+    PRE.combustible_estimado,
+    PRE.km_estimado,
+    FC.costo_peaje,
+    FC.costo_viaticos,
+    FC.costo_hospedaje,
+    FC.extra,
+    VJ.etd,
+    VJ.eta,
+    CASE
+    WHEN VJ.fecha_carga IS NULL
+		THEN '-- / -- / --'
+		ELSE VJ.fecha_carga END AS 'fecha_carga',
+	CASE
+    WHEN VJ.fecha_llegada IS NULL
+		THEN '-- / -- / --'
+		ELSE VJ.fecha_llegada END AS 'fecha_llegada',
+    VJ.combustible_real,
+    VJ.km_real
+FROM
+	presupuesto PRE
+		JOIN viaje VJ ON PRE.id_viaje = VJ.id
+        JOIN factura FC ON FC.id_viaje = VJ.id;
