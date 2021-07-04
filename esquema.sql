@@ -121,7 +121,6 @@ create table presupuesto(
 			costo_viaticos_estimado double not null,
 			costo_hospedaje_estimado double not null,
             km_estimado int not null,
-			combustible_estimado int not null,
             tarifa double not null,
 			extra_estimado double not null,
 			foreign key(id_viaje) references viaje(id),

@@ -22,24 +22,15 @@
 
 <main class="container-fluid">
 
-    <div id="main" class="row text-white">
+    <div id="main">
 
-
-        <div class="info col-12 col-sm-2 bg-dark p-0">
-
-            <div class="mt-3 me-3 text-white text-end">
-                <button class="btn btn-outline-gray rounded"></button>
-            </div>
-
-            <div class="text-center text-white mb-5">
-                <h3 class="mb-3"></h3>
-            </div>
-
-        </div>
-
-        <div class="window col-12 col-sm-9 text-dark">
+        <div class="window text-dark">
             <h1 class="mt-2">Chofer</h1>
             <hr/>
+          
+            {{#vistaActualizarDatosViaje}}
+            {{>actualizarDatosProforma}}
+            {{/vistaActualizarDatosViaje}}
 
             {{#completarLicencia}}
             {{>ingresarLicencia}}
@@ -50,10 +41,7 @@
             {{/editarLicencia}}
         </div>
     </div>
-
-
-
+  
 </main>
-
 
 {{> footer}}

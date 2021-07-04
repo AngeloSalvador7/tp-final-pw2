@@ -13,6 +13,9 @@ include_once("model/CargasModel.php");
 include_once("model/ProformasModel.php");
 include_once("model/VehiculosModel.php");
 include_once("model/ClienteModel.php");
+include_once("model/ChoferModel.php");
+include_once("model/ViajeModel.php");
+include_once ("model/FacturaModel.php");
 
 /*CONTROLLER*/
 include_once("controller/ChoferController.php");
@@ -25,11 +28,12 @@ include_once("controller/SupervisorCargaController.php");
 include_once("controller/ProformasController.php");
 include_once("controller/SupervisorVehiculosController.php");
 include_once("controller/SupervisorClientesController.php");
-
+include_once("controller/ChoferController.php");
 
 /*Other*/
 include_once('third-party/mustache/src/Mustache/Autoloader.php');
 include_once("Router.php");
+include_once('third-party/phpqrcode/qrlib.php');
 
 class Configuration{
 
@@ -76,10 +80,27 @@ class Configuration{
         return new VehiculosModel($database);
     }
 
-    public function getClientesModel(){
-        $database=$this->getDatabase();
+    public function getClientesModel()
+    {
+        $database = $this->getDatabase();
         return new ClienteModel($database);
     }
+
+   public function getChoferModel(){
+
+       $database=$this->getDatabase();
+       return new ChoferModel($database);
+        }
+
+        public function  getViajeModel(){
+        $database=$this->getDatabase();
+        return new ViajeModel($database);
+        }
+
+        public function getFacturaModel(){
+        $database=$this->getDatabase();
+        return new FacturaModel($database);
+        }
 
     /*Controller*/
     public function getEmpleadosController(){
@@ -123,6 +144,10 @@ class Configuration{
 
     public function getVehiculosController(){
         return new SupervisorVehiculosController($this->getRender(),$this->getVehiculosModel());
+    }
+
+    public function getChoferController(){
+        return new ChoferController($this->getRender(),$this->getChoferModel(),$this->getVehiculosModel(),$this->getViajeModel(),$this->getFacturaModel());
     }
 
     public function getRender(){
