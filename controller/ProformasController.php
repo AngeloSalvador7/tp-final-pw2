@@ -1,7 +1,6 @@
 <?php
 
-class ProformasController extends SessionCheck
-{
+class ProformasController extends SessionCheck{
 
     private $render;
     private $proformaModel;
@@ -72,8 +71,16 @@ class ProformasController extends SessionCheck
         echo $this->render->render("view/proformaView.php", $datos);
     }
 
-    public function nueva()
-    {
+    public function mostrarQr(){
+        if(isset($_GET["id_viaje"])) {
+            $id_viaje = $_GET["id_viaje"];
+            $url = "http://localhost/chofer/actualizar?id_viaje=" . $id_viaje;
+
+            QRcode::png($url, NULL, 'H', 5, 1);
+        }
+    }
+
+    public function nueva(){
         $datos['formNuevaProforma'] = true;
 
         $datos['Tractores'] = $this->proformaModel->getTractoresDisponibles();

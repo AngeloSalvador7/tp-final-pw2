@@ -10,10 +10,10 @@ class EmpleadosController extends SessionCheck
         parent::__construct("ADMINISTRADOR");
         $this->render = $render;
         $this->empleadosModel = $empleadosModel;
+
     }
 
-    public function execute()
-    {
+    public function execute(){
         $datos['empleados'] = $this->empleadosModel->getEmpleados();
         if(isset($_SESSION['msg'])) {
             $datos['mensaje'] = $_SESSION['msg'];

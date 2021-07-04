@@ -51,7 +51,7 @@ class EmpleadosModel
 
     public function loginEmployee($form)
     {
-        return $this->database->query("SELECT * FROM empleado e LEFT JOIN rol r ON e.id_rol = r.id where vigente=1 AND email='$form[email]' AND clave='$form[clave]' AND hashcode IS NULL");
+        return $this->database->query("SELECT e.id, e.dni, e.fecha_nacimiento, e.nombre, e.apellido, e.email, e.clave, r.id as id_rol, r.descripcion FROM empleado e LEFT JOIN rol r ON e.id_rol = r.id where vigente=1 AND email='$form[email]' and clave='$form[clave]'");
     }
 
     public function eliminarEmpleado($dato)
@@ -78,4 +78,5 @@ class EmpleadosModel
     public function getEmpleadosById($id){
         return $this->database->query("SELECT e.id, e.dni, e.fecha_nacimiento, e.nombre, e.apellido, e.email, e.clave, r.id as id_tipo, r.descripcion FROM empleado e join rol r ON e.id_rol = r.id where e.vigente = 1 AND e.id = $id");
     }
+
 }

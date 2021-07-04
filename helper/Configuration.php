@@ -8,14 +8,19 @@ include_once("helper/Correo.php");
 
 /*MODEL*/
 include_once("model/HomeModel.php");
+include_once("model/ChoferModel.php");
 include_once("model/EmpleadosModel.php");
 include_once("model/CargasModel.php");
 include_once("model/ProformasModel.php");
 include_once("model/VehiculosModel.php");
 include_once("model/ClienteModel.php");
 include_once("model/ViajesModel.php");
+include_once("model/ChoferModel.php");
+include_once("model/ViajeModel.php");
+include_once("model/FacturaModel.php");
 
 /*CONTROLLER*/
+include_once("controller/ChoferController.php");
 include_once("controller/EmpleadosController.php");
 include_once("controller/ViajesController.php");
 include_once("controller/RegisterController.php");
@@ -26,12 +31,13 @@ include_once("controller/SupervisorCargaController.php");
 include_once("controller/ProformasController.php");
 include_once("controller/SupervisorVehiculosController.php");
 include_once("controller/SupervisorClientesController.php");
-
+include_once("controller/ChoferController.php");
 
 /*Other*/
 include_once('third-party/mustache/src/Mustache/Autoloader.php');
 include_once('third-party/Globales.php');
 include_once("Router.php");
+include_once('third-party/phpqrcode/qrlib.php');
 
 class Configuration
 {
@@ -57,10 +63,17 @@ class Configuration
     {
         return new HomeModel($this->getDatabase());
     }
+
     public function getCargasModel()
     {
         $database = $this->getDatabase();
         return new CargasModel($database);
+    }
+
+    public function getChoferModel()
+    {
+        $database = $this->getDatabase();
+        return new ChoferModel($database);
     }
 
     public function getEmpleadosModel()
@@ -87,10 +100,16 @@ class Configuration
         return new ClienteModel($database);
     }
 
-    public function getViajesModel()
+    public function getViajeModel()
     {
         $database = $this->getDatabase();
-        return new ViajesModel($database);
+        return new ViajeModel($database);
+    }
+
+    public function getFacturaModel()
+    {
+        $database = $this->getDatabase();
+        return new FacturaModel($database);
     }
 
     /*Controller*/
@@ -143,6 +162,11 @@ class Configuration
     public function getViajesController()
     {
         return new ViajesController($this->getRender(), $this->getViajesModel());
+    }
+      
+    public function getChoferController()
+    {
+        return new ChoferController($this->getRender(), $this->getChoferModel(), $this->getVehiculosModel(), $this->getViajeModel(), $this->getFacturaModel());
     }
 
     public function getRender()

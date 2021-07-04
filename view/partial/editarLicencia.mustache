@@ -1,0 +1,12 @@
+{{#editarLicencia}}
+<div class="alert alert-success" role="alert">
+   <form name="licencia" action="chofer/editarLicencia" method="post">
+       <h4>Edite su licencia en caso de ser necesario</h4>
+       <label class="control-label" for="signupLicencia">Numero de licencia</label>
+       <input id="signupLicencia" type="number" value="{{numero_licencia}}"class="form-control" name="licencia"><br>
+       <button class="btn btn-outline-secondary m-1"  type="submit" name="id_chofer" value="{{id_chofer}}">Guardar cambios</button>
+   </form>
+</div>
+
+<h3>{{mensaje}}</h3>
+{{/editarLicencia}}

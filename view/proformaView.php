@@ -287,10 +287,11 @@
                         </div>
                     </div>
                 {{/proforma}}
+                <div class="text-center mb-4 back" >
+                    <img src="/proformas/mostrarQr/id_viaje={{codigoProforma}}"/>
+                </div>
             </div>
         {{/detalleProforma}}
-
-
 
         {{#formNuevaProforma}}
             <div class="col">
@@ -562,6 +563,7 @@
                         {{/Clientes}}
                     </select>
                 </div>
+
 
                 <div class="d-flex flex-wrap justify-content-between m-1">
                     <a href="/" class="mr-auto btn btn-primary">Volver</a>
