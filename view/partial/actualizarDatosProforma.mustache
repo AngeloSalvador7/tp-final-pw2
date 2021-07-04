@@ -58,12 +58,13 @@
         </div>
         <div class="form-group col-12 col-md-6">
             <label for="Estado de viaje " class="mb-1">Estado de viaje</label>
-            <select name="Estado" id="Estado" class="form-select mb-3">
-                <option value="EN CURSO" selected >En curso</option>
+            <select name="Estado" id="estado" class="form-select mb-3" onchange="ShowSelected()">
+                <option value="EN CURSO" selected hidden>En curso</option>
+                <option value="EN CURSO" >En curso</option>
                 <option value="FINALIZADO" >Finalizado</option>
             </select>
         </div>
-        <div class="form-group col-12 col-md-6">
+        <div class="form-group col-12 col-md-6" id="fecha" style="display: none">
             <label for="fecha-llegada" class="mb-1">Fecha de llegada</label>
             <div class="input-group mb-3">
                 <span class="input-group-text">U$D</span>

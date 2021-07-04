@@ -88,8 +88,9 @@ class ChoferController extends SessionCheck
         if(isset($_GET['id_viaje'])){
             header('location : /chofer');
         }
+        //SACAR COMENTARIOS CAUNDO SE PRUEBE
         /*$viajeObtenido=$this->viajeModel->consultarViaje($_GET['id_viaje']);
-  if($viajeObtenido==null || $viajeObtenido['id_chofer']==$_SESSION['usuario']  ['id']     ){
+        if($viajeObtenido==null || $viajeObtenido['id_chofer']==$_SESSION['usuario']  ['id']     ){
          header('location: /chofer');
          exit();
      }*/

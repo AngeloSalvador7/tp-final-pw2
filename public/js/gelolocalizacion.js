@@ -1,3 +1,14 @@
+function ShowSelected() {
+    var select = document.getElementById("estado").value;
+    if (select=="FINALIZADO"){
+        document.getElementById("fecha").style.display='block';
+    }
+    else {
+        document.getElementById("fecha").style.display='none';
+    }
+}
+
+
 
      function loadMap() {
             var output = document.getElementById('map');
