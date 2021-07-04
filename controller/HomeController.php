@@ -30,7 +30,7 @@ class HomeController
                 header('location: /empleados');
                 break;
             case 2:
-                header('location:/chofer');
+                header('location: /chofer');
                 break;
             case 3:
                 header('location: /proformas');

@@ -1,6 +1,5 @@
 <?php
 
-
 class ChoferController extends SessionCheck
 {
     private $render;
@@ -19,23 +18,20 @@ class ChoferController extends SessionCheck
         $this->facturaModel = $facturaModel;
     }
 
-    public function execute()
-    {
-        if (isset($_SESSION['msg'])) {
+    public function execute(){
+        if(isset($_SESSION['msg'])) {
             $datos['mensaje'] = $_SESSION['msg'];
             unset($_SESSION['msg']);
         }
-        if (empty($this->choferModel->tieneLicencia($_SESSION['usuario']['id']))) {
+        if(empty($this->choferModel->tieneLicencia($_SESSION['usuario']['id']))){
             $datos['completarLicencia'] = $_SESSION['usuario']['id'];
-        } else {
+        }else {
             $datos['editarLicencia'] = $this->choferModel->getChoferById($_SESSION['usuario']['id']);
         }
-
         echo $this->render->render("view/homeChoferView.php", $datos);
     }
 
-    public function agregarLicencia()
-    {
+    public function agregarLicencia(){
         $_SESSION['msg'] = "Se guardó la licencia";
         $this->choferModel->agregarLicencia($_POST);
 
@@ -43,9 +39,9 @@ class ChoferController extends SessionCheck
         exit();
     }
 
-    public function editarLicencia()
-    {
-        if ($this->choferModel->editarLicencia($_POST) > 0) {
+
+    public function editarLicencia(){
+        if($this->choferModel->editarLicencia($_POST) > 0){
             $_SESSION['msg'] = "Se actualizó la licencia";
         }
 
