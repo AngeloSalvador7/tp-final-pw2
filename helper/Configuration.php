@@ -28,10 +28,10 @@ include_once("controller/SupervisorVehiculosController.php");
 include_once("controller/SupervisorClientesController.php");
 include_once("controller/ChoferController.php");
 
-
 /*Other*/
 include_once('third-party/mustache/src/Mustache/Autoloader.php');
 include_once("Router.php");
+include_once('third-party/phpqrcode/qrlib.php');
 
 class Configuration{
 
