@@ -64,9 +64,9 @@ class ChoferController extends SessionCheck
         $this->vehiculosModel->actualizarKilometraje($vehiculo['id'],   $this->incrementoDeValores($vehiculo['km_recorrido'],$_POST['kilometros']));
 
         //metodo que inserte mediante query los km/latitud-longitud a viaje(sumar km a km_real y updatear lon-latitud a los actuales.)
-
+        // convierto las latitudes y longitudes que vienen como string a float
         $this->viajeModel->actualizarKilometrosRealesDeViaje($viaje['id'],$this->incrementoDeValores($vehiculo['km_recorrido'],$_POST['kilometros']));
-        $this->viajeModel->actualizarPosicionDeViaje($viaje['id'],$_POST['latitud'],$_POST['longitud']);
+        $this->viajeModel->actualizarPosicionDeViaje($viaje['id'],floatval($_POST['latitud']),floatval($_POST['longitud']));
 
          //metodo que inserte mediante query el combustible cargado a viaje(sumar combustible a combustible_real)
 
