@@ -109,6 +109,7 @@ create table factura(
 			costo_peaje double not null,
 			costo_viaticos double not null,
 			costo_hospedaje double not null,
+			costo_combustible double not null,
 			extra double not null,
 			foreign key(id_viaje) references viaje(id),
 			primary key (id)

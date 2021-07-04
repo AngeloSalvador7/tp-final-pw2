@@ -47,4 +47,9 @@ class VehiculosModel
 
         return $this->database->execute($SQL);
     }
+
+    public function actualizarKilometraje($vehiculoId,$kilometrajeAActualizar){
+         return $this->database->execute("UPDATE vehiculo set km_recorrido=$kilometrajeAActualizar where id=$vehiculoId");
+    }
+
 }

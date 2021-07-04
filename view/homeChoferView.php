@@ -20,6 +20,11 @@
     </div>
 </nav>
 
-<h1>Vista Chofer</h1>
+
+
+{{#vistaActualizarDatosViaje}}
+{{>actualizarDatosProforma}}
+{{/vistaActualizarDatosViaje}}
+
 
 {{> footer}}
