@@ -32,6 +32,17 @@ class ViajesController extends SessionCheck
         echo $this->render->render("view/viajesView.php", $datos);
     }
 
+    public function comparacion(){
+        if(!isset($_GET['cod'])){
+            header("location: viajes");
+            exit();
+        }
+
+        $datos['comparacion'] = $this->viajesModel->contrastarPresupuesto($_GET['cod']);
+
+        echo $this->render->render("view/viajesView.php", $datos);
+    }
+
     public function historico(){
         $datos['listaViajesHistorico'] = true;
         $datos['viajes'] = $this->viajesModel->getViajes(false);
@@ -45,9 +56,15 @@ class ViajesController extends SessionCheck
     }
 
     public function cancelar(){
-        if (empty($_POST['Viaje']) || $this->viajesModel->cancelarViaje($_POST['Viaje'])) {
-            $datos['mensaje'] = "No fue posible Cancelar el viaje $_POST[Viaje]";
-            $datos['tipoMensaje'] = "warning";
+        if (empty($_POST['Viaje']) || $this->viajesModel->cancelarViaje($_POST['Viaje']) < 1) {
+            $datos['mensaje'] = "No fue posible Cancelar el viaje #$_POST[Viaje].";
+            $datos['tipoMensaje'] = "danger";
+        }else{
+            $datos['mensaje'] = "Viaje #$_POST[Viaje] Cancelado con exito!";
+            $datos['tipoMensaje'] = "success";
         }
+
+        header("location: viajes");
+        exit();
     }
 }

@@ -275,7 +275,7 @@ SELECT
 		THEN '-- / -- / --'
 		ELSE VJ.fecha_carga END AS  'FechaCarga',
 	CASE
-    WHEN VJ.fecha_carga IS NULL
+    WHEN VJ.fecha_llegada IS NULL
 		THEN '-- / -- / --'
 		ELSE VJ.fecha_llegada END AS  'FechaLlegada',
 	CASE
@@ -286,4 +286,36 @@ SELECT
 FROM
     viaje VJ
 		JOIN factura FC ON VJ.id = FC.id_viaje
-        JOIN presupuesto PRE ON VJ.id = PRE.id_viaje
+        JOIN presupuesto PRE ON VJ.id = PRE.id_viaje;
+        
+CREATE VIEW Comparacion
+AS
+SELECT
+	VJ.id,
+	PRE.costo_peaje_estimado,
+    PRE.costo_viaticos_estimado,
+    PRE.costo_hospedaje_estimado,
+    PRE.extra_estimado,
+    PRE.tarifa,
+    PRE.combustible_estimado,
+    PRE.km_estimado,
+    FC.costo_peaje,
+    FC.costo_viaticos,
+    FC.costo_hospedaje,
+    FC.extra,
+    VJ.etd,
+    VJ.eta,
+    CASE
+    WHEN VJ.fecha_carga IS NULL
+		THEN '-- / -- / --'
+		ELSE VJ.fecha_carga END AS 'fecha_carga',
+	CASE
+    WHEN VJ.fecha_llegada IS NULL
+		THEN '-- / -- / --'
+		ELSE VJ.fecha_llegada END AS 'fecha_llegada',
+    VJ.combustible_real,
+    VJ.km_real
+FROM
+	presupuesto PRE
+		JOIN viaje VJ ON PRE.id_viaje = VJ.id
+        JOIN factura FC ON FC.id_viaje = VJ.id;
