@@ -63,12 +63,14 @@ class SupervisorCargaController extends SessionCheck
     public function borrarCarga()
     {
         $this->cargasModel->dropCarga($_POST['borrar_id']);
-        $this->editarCarga();
+        header("location: editarCarga");
+        exit();
     }
     public function actualizarCarga()
     {
         $this->cargasModel->actualizarCarga($_POST);
-        $this->editarCarga();
+        header("location: editarCarga");
+        exit();
     }
 
     public function modificarCarga()

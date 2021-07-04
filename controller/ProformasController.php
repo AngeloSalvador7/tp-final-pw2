@@ -1,12 +1,13 @@
 <?php
 
-class ProformasController extends SessionCheck
+class
+ProformasController extends SessionCheck
 {
 
     private $render;
     private $proformaModel;
     private const DatosProforma = 
-    ['Peaje', 'Viaticos', 'Hospedaje', 'Extras', 'Origen', 'Destino', 'ETD', 'ETA', 'Estado', 'Kilometros', 'Combustible',
+    ['Peaje', 'Viaticos', 'Hospedaje', 'Extras', 'Origen', 'Destino', 'ETD', 'ETA', 'Tarifa', 'Kilometros', 'Combustible',
      'Chofer', 'Tractor', 'Arrastre', 'Carga', 'Cliente'];
 
 

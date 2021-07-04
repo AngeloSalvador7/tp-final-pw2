@@ -23,20 +23,20 @@
     </div>
 </nav>
 
-{{#vistaVehiculos}}
-    {{>vehiculos}}
-{{/vistaVehiculos}}
+{{#vistaCliente}}
+{{>clientes}}
+{{/vistaCliente}}
 
-{{#vistaAgregarVehiculo}}
-    {{>agregarVehiculo}}
-{{/vistaAgregarVehiculo}}
+{{#vistaAgregarCliente}}
+{{>agregarCliente}}
+{{/vistaAgregarCliente}}
 
-{{#vistaModificarVehiculo}}
-    {{>editarVehiculo}}
-{{/vistaModificarVehiculo}}
+{{#vistaModificarCliente}}
+{{>editarCliente}}
+{{/vistaModificarCliente}}
 
-{{#vistaModificacionDeVehiculo}}
-    {{>modificarVehiculo}}
-{{/vistaModificacionDeVehiculo}}
+{{#vistaModificacionDeCliente}}
+{{>modificarCliente}}
+{{/vistaModificacionDeCliente}}
 
 {{> footer}}

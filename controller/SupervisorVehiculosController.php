@@ -68,13 +68,15 @@ class SupervisorVehiculosController extends SessionCheck
     public function borrarVehiculo()
     {
         $this->vehiculosModel->dropVehiculo($_POST['borrar_id']);
-        header('location: http://localhost/vehiculos');
+        header('location: editarVehiculo');
+        exit();
     }
 
     public function actualizarVehiculo()
     {
         $this->vehiculosModel->actualizarVehiculo($_POST);
-        $this->editarVehiculo();
+        header('location: editarVehiculo');
+        exit();
     }
 
     public function modificarVehiculo()

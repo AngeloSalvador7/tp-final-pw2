@@ -74,16 +74,16 @@ class ProformasModel{
 
     public function getClientes($id = null){
         if(is_null($id))
-            return $this->database->query("SELECT id AS IdCliente, concat(razon_social, ' (CUIT: ', cuit, ')')  AS InfoCliente FROM cliente");
+            return $this->database->query("SELECT id AS IdCliente, concat(razon_social, ' (CUIT: ', cuit, ')')  AS InfoCliente FROM cliente WHERE vigente = 1");
         else
-            return $this->database->query("SELECT id AS IdCliente, concat(razon_social, ' (CUIT: ', cuit, ')')  AS InfoCliente FROM cliente WHERE id = $id");
+            return $this->database->query("SELECT id AS IdCliente, concat(razon_social, ' (CUIT: ', cuit, ')')  AS InfoCliente FROM cliente WHERE vigente = 1 AND id = $id");
     }
 
     public function getCargasDisponibles($id = null){
         if(is_null($id))
-            return $this->database->query("SELECT id FROM carga WHERE id NOT IN(SELECT id_carga FROM viaje WHERE estado <> 'Finalizado')");
+            return $this->database->query("SELECT * FROM CargasDisponibles");
         else
-            return $this->database->query("SELECT id FROM carga WHERE id NOT IN(SELECT id_carga FROM viaje WHERE estado <> 'Finalizado') AND id = $id");
+            return $this->database->query("SELECT * FROM CargasDisponibles WHERE id = $id");
         
     }
 
@@ -91,8 +91,8 @@ class ProformasModel{
         if(!$this->validar($datos))
             return false;
 
-        $insViaje = "INSERT INTO viaje (origen, destino, eta, etd, estado, km_estimado, combustible_estimado, id_chofer, id_tractor, id_arrastre, id_carga, id_cliente) 
-        VALUES ('$datos[Origen]', '$datos[Destino]', '$datos[ETA]', '$datos[ETD]', '$datos[Estado]', $datos[Kilometros], $datos[Combustible], $datos[Chofer], $datos[Tractor], $datos[Arrastre], $datos[Carga], $datos[Cliente])";
+        $insViaje = "INSERT INTO viaje (origen, destino, eta, etd, estado, id_chofer, id_tractor, id_arrastre, id_carga, id_cliente) 
+        VALUES ('$datos[Origen]', '$datos[Destino]', '$datos[ETA]', '$datos[ETD]', 'Pendiente', $datos[Chofer], $datos[Tractor], $datos[Arrastre], $datos[Carga], $datos[Cliente])";
 
         if($this->database->execute($insViaje) < 1){
             $_SESSION['mensaje'] = "Error al Cargar los datos del Viaje intente nuevamente";
@@ -100,8 +100,8 @@ class ProformasModel{
             return false;
         }
 
-        $insPresupuesto = "INSERT INTO presupuesto (id_viaje, costo_peaje_estimado, costo_viaticos_estimado, costo_hospedaje_estimado, extra_estimado)
-        VALUES (".$this->database->idGen()." , $datos[Peaje], $datos[Viaticos], $datos[Hospedaje], $datos[Extras])";
+        $insPresupuesto = "INSERT INTO presupuesto (id_viaje, costo_peaje_estimado, costo_viaticos_estimado, costo_hospedaje_estimado, extra_estimado, km_estimado, combustible_estimado, tarifa)
+        VALUES (".$this->database->idGen()." , $datos[Peaje], $datos[Viaticos], $datos[Hospedaje], $datos[Extras], $datos[Kilometros], $datos[Combustible], $datos[Tarifa])";
 
         return $this->database->execute($insPresupuesto) > 0;
     }
@@ -110,10 +110,11 @@ class ProformasModel{
         if(!$this->validar($datos))
             return false;
 
-        $updViaje = "UPDATE viaje SET origen = '$datos[Origen]', destino = '$datos[Destino]', eta = '$datos[ETA]', etd = '$datos[ETD]', estado = '$datos[Estado]', km_estimado = $datos[Kilometros],
-            combustible_estimado = $datos[Combustible], id_chofer = $datos[Chofer], id_tractor = $datos[Tractor], id_arrastre = $datos[Arrastre], id_carga = $datos[Carga], id_cliente = $datos[Cliente] WHERE id = $datos[Proforma]";
+        $updViaje = "UPDATE viaje SET origen = '$datos[Origen]', destino = '$datos[Destino]', eta = '$datos[ETA]', etd = '$datos[ETD]', id_chofer = $datos[Chofer],
+            id_tractor = $datos[Tractor], id_arrastre = $datos[Arrastre], id_carga = $datos[Carga], id_cliente = $datos[Cliente] WHERE id = $datos[Proforma]";
 
-        $updPresupuesto = "UPDATE presupuesto SET costo_peaje_estimado = $datos[Peaje], costo_viaticos_estimado = $datos[Viaticos], costo_hospedaje_estimado = $datos[Hospedaje], extra_estimado = $datos[Extras]";
+        $updPresupuesto = "UPDATE presupuesto SET costo_peaje_estimado = $datos[Peaje], costo_viaticos_estimado = $datos[Viaticos], costo_hospedaje_estimado = $datos[Hospedaje],
+         extra_estimado = $datos[Extras] , km_estimado = $datos[Kilometros], combustible_estimado = $datos[Combustible], tarifa = $datos[Tarifa]";
         
         return $this->database->execute($updViaje) > 0 || $this->database->execute($updPresupuesto) > 0;
     }
@@ -139,18 +140,6 @@ class ProformasModel{
 
         if($datos['ETD'] > $datos['ETA']){
             $_SESSION['mensaje'] = "La fecha estimada de partida no puede ser posterior a la fecha estimada de llegada!";
-            $_SESSION['tipoMensaje'] = "danger";
-            return false;
-        }
-
-        if(!in_array($datos['Estado'], ['Finalizado', 'Pendiente', 'En Curso'])){
-            $_SESSION['mensaje'] = "Seleccione un estado de viaje valido.";
-            $_SESSION['tipoMensaje'] = "danger";
-            return false;
-        }
-
-        if(empty($this->getClientes($datos['Cliente']))){
-            $_SESSION['mensaje'] = "El Cliente seleccionado no existe.";
             $_SESSION['tipoMensaje'] = "danger";
             return false;
         }

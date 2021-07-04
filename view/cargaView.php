@@ -14,6 +14,9 @@
                 <a class="nav-link" href="vehiculos">Vehiculos</a>
             </li>
             <li class="nav-item px-3">
+                <a class="nav-link" href="clientes">Clientes</a>
+            </li>
+            <li class="nav-item px-3">
                 <a class="nav-link" href="#">Estadisticas</a>
             </li>
         </ul>
@@ -21,17 +24,18 @@
 </nav>
 
 {{#vistaCargas}}
-    {{>cargas}}
+{{>cargas}}
 {{/vistaCargas}}
 
 {{#vistaAgregarCarga}}
-    {{>agregarCarga}}
+{{>agregarCarga}}
 {{/vistaAgregarCarga}}
 
 {{#vistaModificarCarga}}
-    {{>editarCarga}}
+{{>editarCarga}}
 {{/vistaModificarCarga}}
 {{#vistaModificacionDeCarga}}
-    {{>modificarCarga}}
+{{>modificarCarga}}
 {{/vistaModificacionDeCarga}}
+
 {{> footer}}
