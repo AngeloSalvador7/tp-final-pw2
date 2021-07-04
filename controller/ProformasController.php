@@ -1,14 +1,15 @@
 <?php
 
-class
-ProformasController extends SessionCheck
+class ProformasController extends SessionCheck
 {
 
     private $render;
     private $proformaModel;
-    private const DatosProforma = 
-    ['Peaje', 'Viaticos', 'Hospedaje', 'Extras', 'Origen', 'Destino', 'ETD', 'ETA', 'Tarifa', 'Kilometros', 'Combustible',
-     'Chofer', 'Tractor', 'Arrastre', 'Carga', 'Cliente'];
+    private const DatosProforma =
+    [
+        'Peaje', 'Viaticos', 'Hospedaje', 'Extras', 'Origen', 'Destino', 'ETD', 'ETA', 'Tarifa', 'Kilometros', 'Combustible',
+        'Chofer', 'Tractor', 'Arrastre', 'Carga', 'Cliente'
+    ];
 
 
     public function __construct($render, $proformaModel)
@@ -21,18 +22,30 @@ ProformasController extends SessionCheck
     public function execute()
     {
         $datos['listaProformas'] = true;
-        $datos['proformas'] = $this->proformaModel->getProformas();
+        $datos['proformas'] = $this->proformaModel->getProformas(true);
 
         if (empty($datos['proformas'])) {
             $datos['mensaje'] = "Actualmente no existe ninguna Proforma";
             $datos['tipoMensaje'] = "warning";
         }
 
-        if(isset($_SESSION['mensaje']) && isset($_SESSION['tipoMensaje'])){
+        if (isset($_SESSION['mensaje']) && isset($_SESSION['tipoMensaje'])) {
             $datos['mensaje'] = $_SESSION['mensaje'];
             $datos['tipoMensaje'] = $_SESSION['tipoMensaje'];
             unset($_SESSION['mensaje']);
             unset($_SESSION['tipoMensaje']);
+        }
+
+        echo $this->render->render("view/proformaView.php", $datos);
+    }
+
+    public function historico(){
+        $datos['listaProformasHistorico'] = true;
+        $datos['proformas'] = $this->proformaModel->getProformas(false);
+
+        if (empty($datos['proformas'])) {
+            $datos['mensaje'] = "Actualmente no existe ninguna Proforma en el Historico";
+            $datos['tipoMensaje'] = "warning";
         }
 
         echo $this->render->render("view/proformaView.php", $datos);
@@ -59,7 +72,8 @@ ProformasController extends SessionCheck
         echo $this->render->render("view/proformaView.php", $datos);
     }
 
-    public function nueva(){
+    public function nueva()
+    {
         $datos['formNuevaProforma'] = true;
 
         $datos['Tractores'] = $this->proformaModel->getTractoresDisponibles();
@@ -68,7 +82,7 @@ ProformasController extends SessionCheck
         $datos['Clientes'] = $this->proformaModel->getClientes();
         $datos['Cargas'] = $this->proformaModel->getCargasDisponibles();
 
-        if(isset($_SESSION['mensaje']) && isset($_SESSION['tipoMensaje'])){
+        if (isset($_SESSION['mensaje']) && isset($_SESSION['tipoMensaje'])) {
             $datos['mensaje'] = $_SESSION['mensaje'];
             $datos['tipoMensaje'] = $_SESSION['tipoMensaje'];
             unset($_SESSION['mensaje']);
@@ -78,17 +92,18 @@ ProformasController extends SessionCheck
         echo $this->render->render("view/proformaView.php", $datos);
     }
 
-    public function generar(){
-        foreach(self::DatosProforma as $Llave){
-            if(empty($_POST[$Llave])){
+    public function generar()
+    {
+        foreach (self::DatosProforma as $Llave) {
+            if (empty($_POST[$Llave])) {
                 $_SESSION['mensaje'] = "Complete el campo $Llave para cargar la proforma!";
                 $_SESSION['tipoMensaje'] = "danger";
                 header('location: nueva');
                 exit();
             }
         }
-        
-        if($this->proformaModel->cargarProforma($_POST)){
+
+        if ($this->proformaModel->cargarProforma($_POST)) {
             $_SESSION['mensaje'] = "Proforma cargada con exito!";
             $_SESSION['tipoMensaje'] = "success";
             header('location: /');
@@ -97,10 +112,10 @@ ProformasController extends SessionCheck
 
         header('location: nueva');
         exit();
-        
     }
 
-    public function edicion(){
+    public function edicion()
+    {
         if (empty($_GET['cod'])) {
             header("location: /proformas");
             exit();
@@ -121,7 +136,7 @@ ProformasController extends SessionCheck
         $datos['Clientes'] = $this->proformaModel->getClientes();
         $datos['Cargas'] = $this->proformaModel->getCargasDisponibles();
 
-        if(isset($_SESSION['mensaje']) && isset($_SESSION['tipoMensaje'])){
+        if (isset($_SESSION['mensaje']) && isset($_SESSION['tipoMensaje'])) {
             $datos['mensaje'] = $_SESSION['mensaje'];
             $datos['tipoMensaje'] = $_SESSION['tipoMensaje'];
             unset($_SESSION['mensaje']);
@@ -133,21 +148,21 @@ ProformasController extends SessionCheck
 
     public function modificar()
     {
-        if(empty($_POST['Proforma'])){
+        if (empty($_POST['Proforma'])) {
             header('location: /');
             exit();
         }
 
-        foreach(self::DatosProforma as $Llave){
-            if(empty($_POST[$Llave])){
+        foreach (self::DatosProforma as $Llave) {
+            if (empty($_POST[$Llave])) {
                 $_SESSION['mensaje'] = "Complete el campo $Llave para actualizar la proforma!";
                 $_SESSION['tipoMensaje'] = "danger";
                 header('location: edicion');
                 exit();
             }
         }
-        
-        if($this->proformaModel->actualizarProforma($_POST)){
+
+        if ($this->proformaModel->actualizarProforma($_POST)) {
             $_SESSION['mensaje'] = "Proforma actualizada con exito!";
             $_SESSION['tipoMensaje'] = "success";
             header('location: /');
@@ -156,15 +171,14 @@ ProformasController extends SessionCheck
 
         header('location: edicion');
         exit();
-        
     }
 
     public function eliminar()
     {
-        if(!empty($_POST['proforma']) && $this->proformaModel->eliminarProforma($_POST['proforma'])){
+        if (!empty($_POST['proforma']) && $this->proformaModel->eliminarProforma($_POST['proforma'])) {
             $_SESSION['mensaje'] = "Se elimino la proforma $_POST[proforma] correctamente";
             $_SESSION['tipoMensaje'] = "success";
-        }else{
+        } else {
             $_SESSION['mensaje'] = "No se pudo eliminar la proforma $_POST[proforma]!";
             $_SESSION['tipoMensaje'] = "danger";
         }
@@ -172,5 +186,4 @@ ProformasController extends SessionCheck
         header('location: /');
         exit();
     }
-
 }
