@@ -12,7 +12,7 @@ class ViajeModel
 
     public function iniciarViaje($id)
     {
-        return $this->database->execute("UPDATE viaje set estado='En Curso' where id=$id");
+        return $this->database->execute("UPDATE viaje SET estado='En Curso', fecha_carga='".date("Y-m-d")."' WHERE id=$id");
     }
 
     public function actualizarKilometrosRealesDeViaje($idViaje,$kilometrosAActualizar){
@@ -24,11 +24,15 @@ class ViajeModel
     }
 
     public function consultarViaje($id_viaje){
-        return $this->database->query("SELECT * FROM viaje where id = '$id_viaje'")[0];
+        return $this->database->query("SELECT * FROM viaje where id ='$id_viaje' AND estado NOT IN ('Finalizado', 'Cancelado')")[0];
     }
 
     public function actualizarCombustibleConsumidoDeViaje($idViaje,$combustibleAActualizar){
         return $this->database->execute("UPDATE viaje set combustible_real=$combustibleAActualizar where id=$idViaje");
+    }
+
+    public function terminarViaje($id){
+        return $this->database->execute("UPDATE viaje SET estado='Finalizado', fecha_llegada='".date("Y-m-d")."' WHERE id=$id");
     }
 
 }

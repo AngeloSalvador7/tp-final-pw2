@@ -16,7 +16,7 @@ class EmpleadosModel
 
     public function getEmpleadosSinRol()
     {
-        return $this->database->query("SELECT * FROM empleado e where vigente=1 AND e.id_rol IS NULL");
+        return $this->database->query("SELECT * FROM empleado e where vigente=1 AND e.id_rol IS NULL AND hashcode IS NULL");
     }
 
     public function getRol()
@@ -31,7 +31,22 @@ class EmpleadosModel
 
     public function addEmployee($form)
     {
-        return $this->database->execute("INSERT INTO empleado(dni,fecha_nacimiento,nombre,apellido,email,clave,vigente) VALUES ($form[dni],'$form[fecha_nacimiento]','$form[nombre]','$form[apellido]','$form[email]','$form[clave]',1)");
+        $this->database->execute("INSERT INTO empleado(dni,fecha_nacimiento,nombre,apellido,email,clave,vigente) VALUES ($form[dni],'$form[fecha_nacimiento]','$form[nombre]','$form[apellido]','$form[email]','$form[clave]',1)");
+
+        return $this->database->idGen();
+    }
+
+    public function setHash($id, $email){
+        $md5 = md5($id.$email);
+
+        if($this->database->execute("UPDATE empleado SET hashcode = '$md5' WHERE id=$id") > 0)
+            return $md5;
+        else
+            return null;
+    }
+
+    public function validarHash($hash){
+        return $this->database->execute("UPDATE empleado SET hashcode = NULL WHERE hashcode = '$hash'") > 0;
     }
 
     public function loginEmployee($form)

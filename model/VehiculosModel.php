@@ -16,7 +16,7 @@ class VehiculosModel
 
     public function getUnicoVehiculo($id)
     {
-        return $this->database->query("SELECT v.id,v.marca,v.modelo,v.patente,v.motor,v.chasis,v.km_recorrido,t.id AS id_tipo,t.descripcion FROM vehiculo v LEFT JOIN tipo_arrastre t ON v.id_tipo = t.id WHERE v.vigente = 1 AND v.id=$id");
+        return $this->database->query("SELECT v.id,v.marca,v.modelo,v.patente,v.motor,v.chasis,v.km_recorrido,t.id AS id_tipo,t.descripcion FROM vehiculo v LEFT JOIN tipo_arrastre t ON v.id_tipo = t.id WHERE v.vigente = 1 AND v.id=$id")[0];
     }
 
     public function getArrastres()

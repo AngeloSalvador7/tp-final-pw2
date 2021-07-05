@@ -4,6 +4,7 @@ include_once("helper/MysqlDatabase.php");
 include_once("helper/Render.php");
 include_once("helper/UrlHelper.php");
 include_once("helper/SessionCheck.php");
+include_once("helper/Correo.php");
 
 /*MODEL*/
 include_once("model/HomeModel.php");
@@ -13,6 +14,7 @@ include_once("model/CargasModel.php");
 include_once("model/ProformasModel.php");
 include_once("model/VehiculosModel.php");
 include_once("model/ClienteModel.php");
+include_once("model/ViajesModel.php");
 include_once("model/ChoferModel.php");
 include_once("model/ViajeModel.php");
 include_once("model/FacturaModel.php");
@@ -20,6 +22,7 @@ include_once("model/FacturaModel.php");
 /*CONTROLLER*/
 include_once("controller/ChoferController.php");
 include_once("controller/EmpleadosController.php");
+include_once("controller/ViajesController.php");
 include_once("controller/RegisterController.php");
 include_once("controller/LoginController.php");
 include_once("controller/HomeController.php");
@@ -32,6 +35,7 @@ include_once("controller/ChoferController.php");
 
 /*Other*/
 include_once('third-party/mustache/src/Mustache/Autoloader.php');
+include_once('third-party/Globales.php');
 include_once("Router.php");
 include_once('third-party/phpqrcode/qrlib.php');
 
@@ -102,6 +106,12 @@ class Configuration
         return new ViajeModel($database);
     }
 
+    public function getViajesModel()
+    {
+        $database = $this->getDatabase();
+        return new ViajesModel($database);
+    }
+
     public function getFacturaModel()
     {
         $database = $this->getDatabase();
@@ -137,8 +147,7 @@ class Configuration
 
     public function getRegisterController()
     {
-        $usuario = $this->getEmpleadosModel();
-        return new RegisterController($usuario, $this->getRender());
+        return new RegisterController($this->getEmpleadosModel(), $this->getRender());
     }
 
     public function getLoginController()
@@ -154,6 +163,11 @@ class Configuration
     public function getVehiculosController()
     {
         return new SupervisorVehiculosController($this->getRender(), $this->getVehiculosModel());
+    }
+
+    public function getViajesController()
+    {
+        return new ViajesController($this->getRender(), $this->getViajesModel());
     }
 
     public function getChoferController()
