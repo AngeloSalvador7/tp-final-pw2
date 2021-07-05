@@ -13,6 +13,11 @@ class Render{
 
     public function render($contentFile , $data = array() ){
         $contentAsString =  file_get_contents($contentFile);
+
+        if(isset($_SESSION['usuario']['descripcion'])){
+            $data['ROL'] = $_SESSION['usuario']['descripcion'];
+        }
+
         return  $this->mustache->render($contentAsString, $data);
     }
 }
