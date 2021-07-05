@@ -44,7 +44,7 @@ class Correo
             $_SESSION['tipoMensaje'] = "success";
         } catch (Exception $e) {
             $_SESSION['mensaje'] = "Hubo un problema al finalizar su registro contactese con el administrador";
-            $_SESSION['tipoMensaje'] = "success";
+            $_SESSION['tipoMensaje'] = "danger";
         }
     }
 }
