@@ -106,6 +106,12 @@ class Configuration
         return new ViajeModel($database);
     }
 
+    public function getViajesModel()
+    {
+        $database = $this->getDatabase();
+        return new ViajesModel($database);
+    }
+
     public function getFacturaModel()
     {
         $database = $this->getDatabase();
@@ -163,7 +169,7 @@ class Configuration
     {
         return new ViajesController($this->getRender(), $this->getViajesModel());
     }
-      
+
     public function getChoferController()
     {
         return new ChoferController($this->getRender(), $this->getChoferModel(), $this->getVehiculosModel(), $this->getViajeModel(), $this->getFacturaModel());

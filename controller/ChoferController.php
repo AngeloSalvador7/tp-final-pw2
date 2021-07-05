@@ -18,20 +18,22 @@ class ChoferController extends SessionCheck
         $this->facturaModel = $facturaModel;
     }
 
-    public function execute(){
-        if(isset($_SESSION['msg'])) {
+    public function execute()
+    {
+        if (isset($_SESSION['msg'])) {
             $datos['mensaje'] = $_SESSION['msg'];
             unset($_SESSION['msg']);
         }
-        if(empty($this->choferModel->tieneLicencia($_SESSION['usuario']['id']))){
+        if (empty($this->choferModel->tieneLicencia($_SESSION['usuario']['id']))) {
             $datos['completarLicencia'] = $_SESSION['usuario']['id'];
-        }else {
+        } else {
             $datos['editarLicencia'] = $this->choferModel->getChoferById($_SESSION['usuario']['id']);
         }
         echo $this->render->render("view/homeChoferView.php", $datos);
     }
 
-    public function agregarLicencia(){
+    public function agregarLicencia()
+    {
         $_SESSION['msg'] = "Se guardó la licencia";
         $this->choferModel->agregarLicencia($_POST);
 
@@ -40,14 +42,14 @@ class ChoferController extends SessionCheck
     }
 
 
-    public function editarLicencia(){
-        if($this->choferModel->editarLicencia($_POST) > 0){
+    public function editarLicencia()
+    {
+        if ($this->choferModel->editarLicencia($_POST) > 0) {
             $_SESSION['msg'] = "Se actualizó la licencia";
         }
 
         header('location:/chofer');
         exit();
-
     }
 
     public function actualizarDatosRealesDelViaje()
@@ -55,19 +57,22 @@ class ChoferController extends SessionCheck
         //traer viaje
         $viaje = $this->viajeModel->consultarViaje($_POST['id_viaje']);
         if ($viaje == null) {
-            header('location: /empleados');
+            header('location: /chofer');
             exit();
         }
 
         $factura = $this->facturaModel->consultarFactura($viaje['id']);
         //metodo que inserte mediante query los km a vehiculo(sumar km a km_recorrido)
-        $vehiculo = $this->vehiculosModel->getUnicoVehiculo($viaje['id_tractor']);
-        $this->vehiculosModel->actualizarKilometraje($vehiculo['id'], $this->incrementoDeValores($vehiculo['km_recorrido'], $_POST['kilometros']));
+        $tractor = $this->vehiculosModel->getUnicoVehiculo($viaje['id_tractor']);
+        $arrastre = $this->vehiculosModel->getUnicoVehiculo($viaje['id_arrastre']);
+
+        $this->vehiculosModel->actualizarKilometraje($tractor['id'], $this->incrementoDeValores($tractor['km_recorrido'], $_POST['kilometros']));
+        $this->vehiculosModel->actualizarKilometraje($arrastre['id'], $this->incrementoDeValores($arrastre['km_recorrido'], $_POST['kilometros']));
 
         //metodo que inserte mediante query los km/latitud-longitud a viaje(sumar km a km_real y updatear lon-latitud a los actuales.)
         // convierto las latitudes y longitudes que vienen como string a float
-        $this->viajeModel->actualizarKilometrosRealesDeViaje($viaje['id'], $this->incrementoDeValores($vehiculo['km_recorrido'], $_POST['kilometros']));
-        $this->viajeModel->actualizarPosicionDeViaje($viaje['id'], floatval($_POST['latitud']), floatval($_POST['longitud']));
+        $this->viajeModel->actualizarKilometrosRealesDeViaje($viaje['id'], $this->incrementoDeValores($viaje['km_real'], $_POST['kilometros']));
+        $this->viajeModel->actualizaPosicionDeViaje($viaje['id'], floatval($_POST['latitud']), floatval($_POST['longitud']));
 
         //metodo que inserte mediante query el combustible cargado a viaje(sumar combustible a combustible_real)
 
@@ -80,7 +85,7 @@ class ChoferController extends SessionCheck
         $costoCombustible = $this->incrementoDeValores($factura['extra'], $_POST['costo-combustible']);
         $this->facturaModel->agregarCostosAFactura($viaje['id'], $costoPeaje, $costoViatico, $costoHospedaje, $costoCombustible);
 
-        header('location: /empleados');
+        header("location: /chofer/actualizar/id_viaje=$viaje[id]");
         exit();
     }
 
@@ -102,15 +107,20 @@ class ChoferController extends SessionCheck
         echo $this->render->render("view/homeChoferView.php", $datos);
     }
 
-    public function incrementoDeValores($valorActual, $valorASumar)
+    public function finalizar()
     {
-        if ($valorActual == null) {
-            $valorActual = 0;
+        if (empty($_POST['id_viaje'])) {
+            header('location: /chofer');
+            exit();
         }
-        if ($valorASumar == null) {
-            $valorASumar = 0;
-        }
-        return ($valorActual + $valorASumar);
+
+        $this->viajeModel->terminarViaje($_POST['id_viaje']);
+        header('location: /chofer');
+        exit();
     }
 
+    public function incrementoDeValores($valorActual, $valorASumar)
+    {
+        return ((float)$valorActual + (float)$valorASumar);
+    }
 }
