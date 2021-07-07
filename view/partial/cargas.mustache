@@ -15,7 +15,6 @@
             <ul class="opciones">
                 <li><a class="text-white" href="cargas">Cargas</a></li>
                 <li><a class="text-white" href="cargas/agregarCarga">Agregar carga</a></li>
-                <li><a class="text-white" href="cargas/editarCarga">Editar carga</a></li>
             </ul>
 
         </div>
@@ -35,6 +34,8 @@
                     <th scope="col">Reefer</th>
                     <th scope="col">Temperatura</th>
                     <th scope="col">Arrastre</th>
+                    <th scope="col">Modificar</th>
+                    <th scope="col">Borrar</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -60,13 +61,23 @@
                         <td>{{temperatura}} ºC</td>
                         <td>{{descripcion}}</td>
                         </td>
+                        <td>
+                            <button form="modificar" name="modificar_id" value="{{id}}"
+                                    class="btn btn-outline-secondary btn-sm btn-block">Editar</button>
+                        </td>
+                        <td>
+                            <button form="borrar" name="borrar_id" value="{{id}}"
+                                    class="btn btn-outline-danger btn-sm btn-block">Borrar
+                            </button>
+                        </td>
                     </tr>
                 {{/cargas}}
                 </tbody>
             </table>
             <h3>{{mensaje}}</h3>
         </div>
-
+        <form action="cargas/borrarCarga" id="borrar" method="POST"></form>
+        <form action="cargas/modificarCarga" id="modificar" method="POST"></form>
     </div>
 
 </main>

@@ -15,7 +15,6 @@
             <ul class="opciones">
                 <li><a class="text-white" href="clientes">Clientes</a></li>
                 <li><a class="text-white" href="clientes/agregarCliente">Agregar Cliente</a></li>
-                <li><a class="text-white" href="clientes/editarCliente">Editar Cliente</a></li>
             </ul>
 
         </div>
@@ -33,6 +32,8 @@
                     <th scope="col">Telefono</th>
                     <th scope="col">Email</th>
                     <th scope="col">Razon social</th>
+                    <th scope="col">Modificar</th>
+                    <th scope="col">Borrar</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -45,6 +46,18 @@
                         <td>{{telefono}}</td>
                         <td>{{email}}</td>
                         <td>{{razon_social}}</td>
+                        <td>
+                            <form action="clientes/modificarCliente" id="modificar" method="POST">
+                                <button type="submit" name="modificar_id" value="{{id}}"
+                                        class="btn btn-outline-secondary btn-sm btn-block">Editar</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="clientes/borrarCliente" id="borrar" method="POST">
+                                <button type="submit" name="borrar_id" value="{{id}}"
+                                        class="btn btn-outline-danger btn-sm btn-block">Borrar</button>
+                            </form>
+                        </td>
                     </tr>
                 {{/clientes}}
                 </tbody>
