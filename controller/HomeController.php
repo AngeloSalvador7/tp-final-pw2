@@ -36,7 +36,7 @@ class HomeController
                 header('location: /proformas');
                 break;
             case 4:
-                echo $this->render->render("view/homeMecanicoView.php", $data);
+                header('location: /mecanico');
                 break;
             default;
                 echo $this->render->render("view/homeSinRolView.php", $data);
