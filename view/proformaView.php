@@ -130,6 +130,7 @@
             <div class="window text-dark mx-3 col">
                 <div>
                     <a href="proformas" class="btn mt-2 btn-outline-success float-end">Volver</a>
+                    <a href="proformas/exportarPdf?viaje={{codigoProforma}}" class="btn mt-2  btn-outline-info float-end me-3"  target="_blank">Exportar a PDF</a>
                     <h1 class="mt-2">Información de Proforma Nro: #{{codigoProforma}}</h1>
                 </div>
                 <hr />

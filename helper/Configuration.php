@@ -19,6 +19,7 @@ include_once("model/ViajesModel.php");
 include_once("model/ChoferModel.php");
 include_once("model/ViajeModel.php");
 include_once("model/FacturaModel.php");
+include_once("model/ServiceModel.php");
 
 /*CONTROLLER*/
 include_once("controller/ChoferController.php");
@@ -34,12 +35,12 @@ include_once("controller/SupervisorVehiculosController.php");
 include_once("controller/SupervisorClientesController.php");
 include_once("controller/ChoferController.php");
 include_once("controller/DatosController.php");
+include_once("controller/MecanicoController.php");
 
 /*Other*/
 include_once('third-party/mustache/src/Mustache/Autoloader.php');
 include_once('third-party/Globales.php');
 include_once("Router.php");
-include_once('third-party/phpqrcode/qrlib.php');
 
 class Configuration
 {
@@ -126,6 +127,12 @@ class Configuration
         return new DatosModel($database);
     }
 
+    public function getServiceModel()
+    {
+        $database = $this->getDatabase();
+        return new ServiceModel($database);
+    }
+
     /*Controller*/
     public function getEmpleadosController()
     {
@@ -187,7 +194,10 @@ class Configuration
     {
         return new ChoferController($this->getRender(), $this->getChoferModel(), $this->getVehiculosModel(), $this->getViajeModel(), $this->getFacturaModel());
     }
-
+    public function getMecanicoController()
+    {
+        return new MecanicoController($this->getRender(), $this->getVehiculosModel(), $this->getViajeModel(), $this->getServiceModel());
+    }
     public function getRender()
     {
         return new Render('view/partial');

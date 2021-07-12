@@ -12,25 +12,7 @@ class SupervisorCargaController extends SessionCheck
     }
     public function execute()
     {
-        $this->CargasView();
-    }
-
-    private function CargasView()
-    {
-        if(!$_SESSION['usuario']){
-            header("Location: /");
-            exit();
-        }
-
-        $data['usuario']=$_SESSION['usuario'];
-        $data['vistaCargas']=true;
-        $data['cargas']=$this->cargasModel->getCargas();
-
-        if (!$data['cargas']){
-            $data['mensaje'] = "No hay cargas registradas";
-        }
-
-        echo $this->render->render("view/cargaView.php", $data);
+        $this->editarCarga();
     }
 
     public function agregarCarga()

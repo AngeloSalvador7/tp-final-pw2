@@ -1,5 +1,7 @@
 <?php
 
+
+
 class ProformasController extends SessionCheck{
 
     private $render;
@@ -72,6 +74,7 @@ class ProformasController extends SessionCheck{
     }
 
     public function mostrarQr(){
+        include('third-party/phpqrcode/qrlib.php');
         if(isset($_GET["id_viaje"])) {
             $id_viaje = $_GET["id_viaje"];
             $url = "http://localhost/chofer/actualizar?id_viaje=" . $id_viaje;
@@ -193,4 +196,16 @@ class ProformasController extends SessionCheck{
         header('location: /');
         exit();
     }
+
+    public function exportarPdf(){
+        require('third-party/fpdf/fpdf.php');
+        include('third-party/phpqrcode/qrlib.php');
+        $datos["id_viaje"]= $_GET["viaje"];
+        $datos['detalleProforma'] = true;
+        $datos['proforma'] = $this->proformaModel->getProformaById($_GET['viaje']);
+        $pdf=$this->proformaModel->exportarProformaPDF($datos);
+
+        echo $this->render->render("view/proformaView.php", $pdf);
+    }
+
 }
