@@ -148,4 +148,111 @@ class ProformasModel
 
         return true;
     }
+
+    public function exportarProformaPDF($data){
+        $pdf = new FPDF();
+
+        $pdf->AddPage();
+        // Logo
+        $pdf->Image('public/images/bandmember.png',80,2,50);
+        $pdf->Ln(50);
+        // Titulo
+        $pdf->SetFont('Helvetica','B',18);
+        $pdf->SetTextColor(33,150,243);
+        $pdf->Cell(0,10,"Presupuesto: ".$data["proforma"]["Proforma"],0,0,'C');
+        $pdf->Ln();
+        $pdf->SetFont('Helvetica','',12);
+        $pdf->SetTextColor(0,0,0);
+        //Costos
+        $pdf->SetFont('Helvetica','B',14);
+        $pdf->SetTextColor(33,150,243);
+        $pdf->Cell(0,10,"Presupuesto",0,1,'L');
+        $pdf->SetFont('Helvetica','',12);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->Cell(0,10,'Viaticos: $'.$data["proforma"]["Viaticos"],0,1,'L');
+        $pdf->Cell(0,10,'Extras: $'.$data["proforma"]["Extras"],0,1,'L');
+        $pdf->Cell(0,10,'Hospedaje: $'.$data["proforma"]["Hospedaje"],0,1,'L');
+        $pdf->Cell(0,10,'Tarifa: $'.$data["proforma"]["Tarifa"],0,1,'L');
+        $pdf->Ln(5);
+        $pdf->SetFont('Helvetica','B',14);
+        $pdf->SetTextColor(33,150,243);
+        $total=$data["proforma"]["Viaticos"]+$data["proforma"]["Extras"]+$data["proforma"]["Hospedaje"]+$data["proforma"]["Tarifa"];
+        $pdf->Cell(0,10,"TOTAL: $".$total,0,1,'L');
+        $pdf->Ln(5);
+        //Viaje
+        $pdf->SetFont('Helvetica','B',14);
+        $pdf->SetTextColor(33,150,243);
+        $pdf->Cell(0,10,"Viaje",0,1,'L');
+        $pdf->SetFont('Helvetica','',12);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->Cell(0,10,'Origen: '.$data["proforma"]["Origen"],0,1,'L');
+        $pdf->Cell(0,10,'Destino: '.$data["proforma"]["Destino"],0,1,'L');
+        $pdf->Cell(0,10,'ETD: '.$data["proforma"]["ETD"],0,1,'L');
+        $pdf->Cell(0,10,'ETA: '.$data["proforma"]["ETA"],0,1,'L');
+        $pdf->Cell(0,10,'Kilometros Estimados: '.$data["proforma"]["Kilometros"]." KM",0,1,'L');
+        $pdf->Cell(0,10,'Combustible Estimado: '.$data["proforma"]["Combustible"]." L",0,1,'L');
+        $pdf->Ln(5);
+        // Cliente
+        $pdf->SetFont('Helvetica','B',14);
+        $pdf->SetTextColor(33,150,243);
+        $pdf->Cell(0,10,"Datos del Cliente",0,1,'L');
+        $pdf->SetFont('Helvetica','',12);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->Cell(0,10,'Denominacion: '.$data["proforma"]["Denominacion"],0,1,'L');
+        $pdf->Cell(0,10,'Razon Social: '.$data["proforma"]["RazonSocial"],0,1,'L');
+        $pdf->Cell(0,10,'CUIT: '.$data["proforma"]["CUIT"],0,1,'L');
+        $pdf->Cell(0,10,'Direccion: '.$data["proforma"]["Direccion"],0,1,'L');
+        $pdf->Cell(0,10,'Telefono: '.$data["proforma"]["Telefono"],0,1,'L');
+        $pdf->Cell(0,10,'Email: '.$data["proforma"]["EmailCliente"],0,1,'L');
+        $pdf->Ln(5);
+        // Chofer
+        $pdf->SetFont('Helvetica','B',14);
+        $pdf->SetTextColor(33,150,243);
+        $pdf->Cell(0,10,"Chofer Asignado",0,1,'L');
+        $pdf->SetFont('Helvetica','',12);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->Cell(0,10,'Apellido y Nombre: '.$data["proforma"]["Chofer"].".",0,1,'L');
+        $pdf->Cell(0,10,'DNI: '.$data["proforma"]["DNI"].".",0,1,'L');
+        $pdf->Cell(0,10,'Email: '.$data["proforma"]["EmailChofer"].".",0,1,'L');
+        $pdf->Cell(0,10,'Numero de licencia: '.$data["proforma"]["NumeroLicencia"].".",0,1,'L');
+        $pdf->Ln(5);
+        // Vehiculo
+        $pdf->SetFont('Helvetica','B',14);
+        $pdf->SetTextColor(33,150,243);
+        $pdf->Cell(0,10,"Vehiculos",0,1,'L');
+        $pdf->SetFont('Helvetica','',12);
+        $pdf->Cell(0,10,"Tractor",0,1,'L');
+        $pdf->SetTextColor(0,0,0);
+        $pdf->Cell(0,10,'Marca: '.$data["proforma"]["TMarca"].".",0,1,'L');
+        $pdf->Cell(0,10,'Patente: '.$data["proforma"]["TPatente"].".",0,1,'L');
+        $pdf->Cell(0,10,'Modelo: '.$data["proforma"]["TModelo"].".",0,1,'L');
+        $pdf->SetFont('Helvetica','',12);
+        $pdf->SetTextColor(33,150,243);
+        $pdf->Cell(0,10,"Arrastre",0,1,'L');
+        $pdf->SetTextColor(0,0,0);
+        $pdf->Cell(0,10,'Marca: '.$data["proforma"]["AMarca"].".",0,1,'L');
+        $pdf->Cell(0,10,'Patente: '.$data["proforma"]["APatente"].".",0,1,'L');
+        $pdf->Cell(0,10,'Modelo: '.$data["proforma"]["AModelo"].".",0,1,'L');
+        $pdf->Ln(5);
+        //Carga
+        $pdf->SetFont('Helvetica','B',14);
+        $pdf->SetTextColor(33,150,243);
+        $pdf->Cell(0,10,"Carga",0,1,'L');
+        $pdf->SetFont('Helvetica','',12);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->Cell(0,10,'Descripcion: '.$data["proforma"]["DescripcionCarga"],0,1,'L');
+        $pdf->Cell(0,10,'Peso Neto: '.$data["proforma"]["Peso"],0,1,'L');
+        $pdf->Cell(0,10,'Hazard: '.$data["proforma"]["Hazard"],0,1,'L');
+        $pdf->Cell(0,10,'Reefer: '.$data["proforma"]["Reefer"],0,1,'L');
+        $pdf->Cell(0,10,'IMO Class: '.$data["proforma"]["IMOClass"],0,1,'L');
+        $pdf->Cell(0,10,'IMO Sub-Class: '.$data["proforma"]["IMOSClass"],0,1,'L');
+        $pdf->Cell(0,10,'Temperatura: '.$data["proforma"]["Temperatura"],0,1,'L');
+        $pdf->Cell(0,10,'Tipo de Carga: '.$data["proforma"]["TipoCarga"],0,1,'L');
+        $pdf->Ln(5);
+
+        QRcode::png("http://localhost/chofer/actualizar?id_viaje=" .$data["id_viaje"],"qr_img.png");
+        $pdf->Image("qr_img.png", 150,100,40, 40, "png");
+        $pdf->Output();
+        return $pdf;
+    }
 }
