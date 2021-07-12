@@ -8,6 +8,7 @@ include_once("helper/Correo.php");
 
 /*MODEL*/
 include_once("model/HomeModel.php");
+include_once("model/DatosModel.php");
 include_once("model/ChoferModel.php");
 include_once("model/EmpleadosModel.php");
 include_once("model/CargasModel.php");
@@ -33,6 +34,7 @@ include_once("controller/ProformasController.php");
 include_once("controller/SupervisorVehiculosController.php");
 include_once("controller/SupervisorClientesController.php");
 include_once("controller/ChoferController.php");
+include_once("controller/DatosController.php");
 include_once("controller/MecanicoController.php");
 
 /*Other*/
@@ -119,11 +121,18 @@ class Configuration
         return new FacturaModel($database);
     }
 
+    public function getDatosModel()
+    {
+        $database = $this->getDatabase();
+        return new DatosModel($database);
+    }
+
     public function getServiceModel()
     {
         $database = $this->getDatabase();
         return new ServiceModel($database);
     }
+
     /*Controller*/
     public function getEmpleadosController()
     {
@@ -134,6 +143,11 @@ class Configuration
     public function getHomeController()
     {
         return new HomeController($this->getRender(), $this->getHomeModel());
+    }
+
+    public function getDatosController()
+    {
+        return new DatosController($this->getRender(), $this->getDatosModel());
     }
 
     public function getProformasController()
