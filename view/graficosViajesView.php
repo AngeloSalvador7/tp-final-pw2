@@ -22,9 +22,9 @@
 
         </div>
         <div class="window text-dark mx-3 col-12 col-sm-9">
-            <div class="d-flex m-3">
-                <div id="chart_ganancias"></div>
-                <div id="chart_div"></div>
+            <div class="row m-3">
+                <div id="chart_ganancias" class="col-12 col-lg-6"></div>
+                <div id="chart_div" class="col-12 col-lg-6"></div>
             </div>
         </div>
     </div>

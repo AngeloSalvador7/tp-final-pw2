@@ -15,14 +15,14 @@ function ganancias() {
         var response = JSON.parse(this.responseText);
         var parsedResponse = [];
         var meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre',
-                    'Noviembre', 'Diciembre'];
+            'Noviembre', 'Diciembre'];
 
         response.forEach(row => {
             parsedResponse.push(
                 [
-                    meses[row.mes - 1], 
+                    meses[row.mes - 1],
                     parseFloat(row.ingresos, 10),
-                    parseFloat(row.gastos, 10), 
+                    parseFloat(row.gastos, 10),
                     parseFloat(row.ganancias, 10)
                 ]);
         });
@@ -36,13 +36,14 @@ function ganancias() {
             },
             bars: 'vertical',
             vAxis: { format: 'decimal' },
-            height: 400,
+            height: 350,
             colors: ['#1b9e77', '#d95f02', '#7570b3']
         };
 
         var chart = new google.charts.Bar(document.getElementById('chart_ganancias'));
         chart.draw(data, google.charts.Bar.convertOptions(options));
     }, "http://localhost/datos/getGanancias");
+    console.log(url);
 }
 
 function estadoViajes() {
@@ -63,6 +64,10 @@ function estadoViajes() {
 
         var options = {
             'title': 'Porcentaje de viajes Segun su Estado',
+            'titleTextStyle': {
+                color: 'gray',
+                bold: false
+            },
             'width': 600,
             'height': 400
         };
