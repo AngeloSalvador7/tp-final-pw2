@@ -47,11 +47,11 @@ class ViajesModel{
 
     private function color($valor){
         if($valor > 0){
-            return '<span class="text-success">+ U$D'.$valor.'</span>';
+            return '<span class="text-success">+ U$D '.$valor.'</span>';
         }
 
         if($valor < 0){
-            return '<span class="text-danger">- U$D'.$valor.'</span>';
+            return '<span class="text-danger">- U$D '. abs($valor).'</span>';
         }
 
         return $valor;
