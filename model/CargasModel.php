@@ -1,5 +1,4 @@
 <?php
-
 class CargasModel
 {
     private $database;

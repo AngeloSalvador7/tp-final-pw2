@@ -7,18 +7,25 @@
                 <a class="nav-link" href="home">{{nombre}}</a>
             </li>
             <li class="nav-item px-3">
-                <a class="nav-link" href="home">Viajes</a>
+                <a class="nav-link" href="home">Home</a>
             </li>
             <li class="nav-item px-3">
-                <a class="nav-link" href="home">Empleados</a>
-            </li>
-            <li class="nav-item px-3">
-                <a class="nav-link" href="home">Estadisticas</a>
+                <a class="nav-link" href="mecanico/service">Service</a>
             </li>
         </ul>
     </div>
 </nav>
 
-<h1>Vista Mecanico</h1>
+{{#vistaAccionesService}}
+    {{>acionesService}}
+{{/vistaAccionesService}}
+
+{{#vistaAgregarService}}
+    {{>agregarService}}
+{{/vistaAgregarService}}
+
+{{#vistaModificarService}}
+    {{>modificarService}}
+{{/vistaModificarService}}
 
 {{> footer}}
