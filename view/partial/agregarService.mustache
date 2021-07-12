@@ -13,70 +13,57 @@
             </div>
 
             <ul class="opciones">
-                <li><a class="text-white" href="cargas">Cargas</a></li>
-                <li><a class="text-white" href="cargas/agregarCarga">Agregar carga</a></li>
-                <li><a class="text-white" href="cargas/editarCarga">Editar carga</a></li>
+                <li><a class="text-white" href="mecanico/service">Service</a></li>
+                <li><a class="text-white" href="mecanico/agregarService">Realizar service</a></li>
             </ul>
 
         </div>
 
         <div class="window col-12 col-sm-9 text-dark">
-            <h1 class="mt-2">Agregar una carga</h1>
+            <h1 class="mt-2">Agregar un service</h1>
             <hr/>
             <div class="container-fluid">
                 <div class="row">
                     <div class="panel panel-primary">
                         <div class="panel-body">
-                            <form action="cargas/insertarCarga" method="POST">
+                            <form action="mecanico/insertarService" method="POST">
                                 <div class="form-group mt-2">
-                                    <label class="control-label" for="peso_neto">Peso neto (Kg)</label>
-                                    <input id="peso_neto" type="number" name="peso_neto" class="form-control" placeholder="Ingrese en peso neto de la carga">
+                                    <label class="control-label" for="id_vechiculo">Vehículo</label>
+                                    <select name="id_vechiculo" id="id_vechiculo" class="form-select"
+                                            aria-label="Default select example">
+                                        <option value="" selected disabled hidden>Elija Vehículo</option>
+                                        {{#vehiculos}}
+                                            <option value="{{id}}">{{patente}}</option>
+                                        {{/vehiculos}}
+                                    </select>
                                 </div>
+
                                 <div class="form-group mt-2">
-                                    <label class="control-label" for="peso_neto">Descripcion</label>
-                                    <input id="Carga" type="text" name="Carga" class="form-control" placeholder="Ingrese una descripcion de la Carga">
-                                </div>
-                                <div class="form-group mt-2">
-                                    <label class="control-label" for="hazard">Hazard</label>
-                                    <select name="hazard" id="hazard" class="form-select" aria-label="Default select example">
-                                        <option value="" selected disabled hidden>Elija Hazard</option>
+                                    <label class="control-label" for="is_externo">Service interno</label>
+                                    <select name="is_externo" id="is_externo" class="form-select"
+                                            aria-label="Default select example">
+                                        <option value="" selected disabled hidden>Elija service</option>
                                         <option value="0">NO</option>
                                         <option value="1">SI</option>
                                     </select>
                                 </div>
                                 <div class="form-group mt-2">
-                                    <label class="control-label" for="clase_IMO">Clase IMO</label>
-                                    <input id="clase_IMO" type="number" name="clase_IMO" class="form-control" placeholder="Ingrese la clase IMO de la carga">
+                                    <label class="control-label" for="fecha">Ingrese la fecha del service</label>
+                                    <input id="fecha" type="date" name="fecha" class="form-control">
                                 </div>
                                 <div class="form-group mt-2">
-                                    <label class="control-label" for="sub_clase_IMO">Subclase IMO</label>
-                                    <input id="sub_clase_IMO" type="number" name="sub_clase_IMO" class="form-control"  placeholder="Ingrese la subclase IMO de la carga">
-                                </div>
-
-                                <div class="form-group mt-2">
-                                    <label class="control-label" for="reefer">Reefer</label>
-                                    <select name="reefer" id="reefer" class="form-select" aria-label="Default select example">
-                                        <option value="" selected disabled hidden>Elija Reefer</option>
-                                            <option value="0">NO</option>
-                                             <option value="1">SI</option>
-                                    </select>
+                                    <label class="control-label" for="detalle">Detalle</label>
+                                    <input id="detalle" type="text" name="detalle" class="form-control"
+                                           placeholder="Ingrese el detalle del service">
                                 </div>
                                 <div class="form-group mt-2">
-                                    <label class="control-label" for="temperatura">Temperatura (ºC)</label>
-                                    <input id="temperatura" type="number" name="temperatura" class="form-control"  placeholder="Ingrese la temperatura de la carga">
+                                    <label for="costo" class="mb-1">Costo del service</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">U$D</span>
+                                        <input type="number" class="form-control" id="costo" name="costo">
+                                    </div>
                                 </div>
-
-                                <div class="form-group mt-2">
-                                    <label class="control-label" for="id_tipo">Tipo de arrastre</label>
-                                    <select name="id_tipo" id="id_tipo" class="form-select" aria-label="Default select example">
-                                        <option value="" selected disabled hidden>Elija Arrastre</option>
-                                        {{#arrastre}}
-                                            <option value="{{tipo_id}}">{{tipo_descripcion}}</option>
-                                        {{/arrastre}}
-                                    </select>
-                                </div>
-
-                                <div class="form-group mt-2 d-flex justify-content-end" >
+                                <div class="form-group mt-2 d-flex justify-content-end">
                                     <button class="btn btn-success btn-block mt-4 mb-4">Crear</button>
                                 </div>
                             </form>

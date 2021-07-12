@@ -21,4 +21,9 @@ class ServiceModel
     {
         return $this->database->query("DELETE FROM service WHERE id=$idService");
     }
+    public function addServices($form)
+    {
+        return $this->database->execute("INSERT INTO service (fecha, costo, is_externo, detalle, id_mecanico, id_vechiculo)
+        VALUES  ('$form[fecha]', $form[costo],$form[is_externo],'$form[detalle]',$form[id_mecanico],$form[id_vechiculo])");
+    }
 }

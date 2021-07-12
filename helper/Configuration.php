@@ -19,7 +19,6 @@ include_once("model/ChoferModel.php");
 include_once("model/ViajeModel.php");
 include_once("model/FacturaModel.php");
 include_once("model/ServiceModel.php");
-include_once("model/MecanicoModel.php");
 
 /*CONTROLLER*/
 include_once("controller/ChoferController.php");
@@ -120,11 +119,6 @@ class Configuration
         return new FacturaModel($database);
     }
 
-    public function getMecanicoModel()
-    {
-        $database = $this->getDatabase();
-        return new MecanicoModel($database);
-    }
     public function getServiceModel()
     {
         $database = $this->getDatabase();
@@ -188,7 +182,7 @@ class Configuration
     }
     public function getMecanicoController()
     {
-        return new MecanicoController($this->getRender(), $this->getMecanicoModel(), $this->getVehiculosModel(), $this->getViajeModel(), $this->getServiceModel());
+        return new MecanicoController($this->getRender(), $this->getVehiculosModel(), $this->getViajeModel(), $this->getServiceModel());
     }
     public function getRender()
     {

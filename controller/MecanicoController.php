@@ -1,17 +1,16 @@
 <?php
+
 class MecanicoController extends SessionCheck
 {
     private $render;
-    private $mecanicoModel;
     private $vehiculosModel;
     private $viajeModel;
     private $serviceModel;
 
-    public function __construct($getRender,$getMecanicoModel,$getVehiculosModel,$getViajeModel,$getServiceModel)
+    public function __construct($getRender, $getVehiculosModel, $getViajeModel, $getServiceModel)
     {
         parent::__construct("MECANICO");
         $this->render = $getRender;
-        $this->mecanicoModel = $getMecanicoModel;
         $this->vehiculosModel = $getVehiculosModel;
         $this->viajeModel = $getViajeModel;
         $this->serviceModel = $getServiceModel;
@@ -24,37 +23,44 @@ class MecanicoController extends SessionCheck
 
     public function service()
     {
-        $datos['vistaAccionesService']=true;
-        $datos['service']=$this->serviceModel->getServices();
+        $datos['vistaAccionesService'] = true;
+        $datos['service'] = $this->serviceModel->getServices();
 
         if (!$datos['service'])
-            $datos['mensaje']="No se encontraron services";
-        echo $this->render->render("view/homeMecanicoView.php",$datos);
+            $datos['mensaje'] = "No se encontraron services";
+        echo $this->render->render("view/homeMecanicoView.php", $datos);
     }
 
     public function modificarService()
     {
-        $datos['vistaModificarService']=true;
-        echo $this->render->render("view/homeMecanicoView.php",$datos);
+        $datos['vistaModificarService'] = true;
+        echo $this->render->render("view/homeMecanicoView.php", $datos);
     }
 
     public function agregarService()
     {
-        $datos['vistaAgregarService']=true;
-        echo $this->render->render("view/homeMecanicoView.php",$datos);
+        $datos['vistaAgregarService'] = true;
+        $datos['vehiculos'] = $this->vehiculosModel->getVehiculos();
+        echo $this->render->render("view/homeMecanicoView.php", $datos);
     }
 
     //uso para los forms, acciones a la BD
     public function insertarService()
     {
+        $_POST['id_mecanico'] = $_SESSION['usuario']['id'];
 
+        $this->serviceModel->addServices($_POST);
+        header('location: /mecanico/service');
+        exit();
     }
+
     public function borrarService()
     {
         $this->serviceModel->deleteServices($_POST['borrar_id']);
         header('location: /mecanico/service');
         exit();
     }
+
     public function cambiarService()
     {
 
