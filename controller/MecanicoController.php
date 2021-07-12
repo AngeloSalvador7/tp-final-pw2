@@ -34,6 +34,9 @@ class MecanicoController extends SessionCheck
     public function modificarService()
     {
         $datos['vistaModificarService'] = true;
+       $datos['vehiculos'] = $this->vehiculosModel->getVehiculos();
+       $datos['service']=$this->serviceModel->getServicesbyId($_POST['modificar_id'])[0];
+       $datos['id_service']=$_POST['modificar_id'];
         echo $this->render->render("view/homeMecanicoView.php", $datos);
     }
 
@@ -63,6 +66,8 @@ class MecanicoController extends SessionCheck
 
     public function cambiarService()
     {
-
+        $this->serviceModel->setService($_POST);
+        header('location: /mecanico/service');
+        exit();
     }
 }

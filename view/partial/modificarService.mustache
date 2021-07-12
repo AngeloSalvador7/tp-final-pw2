@@ -13,87 +13,70 @@
             </div>
 
             <ul class="opciones">
-                <li><a class="text-white" href="cargas">Cargas</a></li>
-                <li><a class="text-white" href="cargas/agregarCarga">Agregar carga</a></li>
-                <li><a class="text-white" href="cargas/editarCarga">Editar carga</a></li>
+                <li><a class="text-white" href="mecanico/service">Service</a></li>
+                <li><a class="text-white" href="mecanico/agregarService">Realizar service</a></li>
             </ul>
 
         </div>
 
         <div class="window col-12 col-sm-9 text-dark">
-            <h1 class="mt-2">Modificar carga {{id}}</h1>
+            <h1 class="mt-2">Modificar service #{{id_service}}</h1>
             <hr/>
             <div class="container-fluid">
                 <div class="row">
                     <div class="panel panel-primary">
                         <div class="panel-body">
-                            {{#carga}}
-                                <form action="cargas/actualizarCarga" method="POST">
+                            {{#service}}
+                                <form action="mecanico/cambiarService" method="POST">
+
                                     <div class="form-group mt-2">
-                                        <label class="control-label" for="peso_neto">Peso neto</label>
-                                        <input id="peso_neto" type="number" value="{{peso_neto}}" name="peso_neto"
-                                               class="form-control">
-                                    </div>
-                                    <div class="form-group mt-2">
-                                        <label class="control-label" for="Carga">Carga</label>
-                                        <input id="Carga" type="text" value="{{Carga}}" name="Carga"
-                                               class="form-control">
-                                    </div>
-                                    <div class="form-group mt-2">
-                                        <label class="control-label" for="hazard">Hazard</label>
-                                        <select name="hazard" id="hazard" class="form-select"
+                                        <label class="control-label" for="id_vechiculo">Vehículo</label>
+                                        <select name="id_vehiculo" id="id_vechiculo" class="form-select"
                                                 aria-label="Default select example">
-                                            <option value="{{hazard}}" selected hidden>{{#hazard}}SI{{/hazard}}
-                                                {{^hazard}}NO{{/hazard}}
+                                            <option value="{{id_vehiculo}}" selected hidden>{{patente}}</option>
+                                            {{#vehiculos}}
+                                                <option value="{{id}}">{{patente}}</option>
+                                            {{/vehiculos}}
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group mt-2">
+                                        <label class="control-label" for="is_externo">Service interno</label>
+                                        <select name="is_externo" id="is_externo" class="form-select"
+                                                aria-label="Default select example">
+                                            <option value="{{is_externo}}" selected hidden>
+                                                {{#is_externo}}
+                                                    SI
+                                                {{/is_externo}}
+                                                {{^is_externo}}
+                                                    NO
+                                                {{/is_externo}}
                                             </option>
                                             <option value="0">NO</option>
                                             <option value="1">SI</option>
                                         </select>
                                     </div>
                                     <div class="form-group mt-2">
-                                        <label class="control-label" for="clase_IMO">Clase IMO</label>
-                                        <input id="clase_IMO" type="number" value="{{imo_class}}" name="clase_IMO" class="form-control">
+                                        <label class="control-label" for="fecha">Ingrese la fecha del service</label>
+                                        <input id="fecha" type="date" value="{{fecha}}" name="fecha" class="form-control">
                                     </div>
                                     <div class="form-group mt-2">
-                                        <label class="control-label" for="sub_clase_IMO">Sub Clase IMO</label>
-                                        <input id="sub_clase_IMO" value="{{imo_sclass}}" type="number" name="sub_clase_IMO"
-                                               class="form-control">
-                                    </div>
-
-                                    <div class="form-group mt-2">
-                                        <label class="control-label" for="reefer">Reefer</label>
-                                        <select name="reefer" id="reefer" class="form-select"
-                                                aria-label="Default select example">
-                                            <option value="{{reefer}}" selected hidden>{{#reefer}}SI{{/reefer}}
-                                                {{^reefer}}NO{{/reefer}}
-                                            </option>
-                                            <option value="0">NO</option>
-                                            <option value="1">SI</option>
-                                        </select>
+                                        <label class="control-label" for="detalle">Detalle</label>
+                                        <input id="detalle" type="text" value="{{detalle}}" name="detalle" class="form-control"
+                                               placeholder="Ingrese el detalle del service">
                                     </div>
                                     <div class="form-group mt-2">
-                                        <label class="control-label" for="temperatura">Temperatura</label>
-                                        <input id="temperatura" type="number" value="{{temperatura}}" name="temperatura" class="form-control">
+                                        <label for="costo" class="mb-1">Costo del service</label>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">U$D</span>
+                                            <input type="number" class="form-control" value="{{costo}}" id="costo" name="costo">
+                                        </div>
                                     </div>
-
-                                    <div class="form-group mt-2">
-                                        <label class="control-label" for="id_tipo">Tipo de arrastre</label>
-                                        <select name="id_tipo" id="id_tipo" class="form-select"
-                                                aria-label="Default select example">
-                                            <option value="{{id_tipo}}" selected hidden>{{descripcion}}</option>
-                                            {{#arrastre}}
-                                                <option value="{{tipo_id}}">{{tipo_descripcion}}</option>
-                                            {{/arrastre}}
-
-                                        </select>
-                                    </div>
-
                                     <div class="form-group mt-2 d-flex justify-content-end">
-                                        <button name="modificar_id" value="{{id}}"
-                                                class="btn btn-warning btn-block">Modificar</button>
+                                        <button value="{{id}}" id="modificar_id" name="modificar_id" class="btn btn-success btn-block mt-4 mb-4">Modificar</button>
                                     </div>
                                 </form>
-                            {{/carga}}
+                            {{/service}}
                         </div>
                     </div>
                 </div>
