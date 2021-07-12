@@ -15,7 +15,6 @@
             <ul class="opciones">
                 <li><a class="text-white" href="vehiculos">Vehiculos</a></li>
                 <li><a class="text-white" href="vehiculos/agregarVehiculo">Agregar vehiculo</a></li>
-                <li><a class="text-white" href="vehiculos/editarVehiculo">Editar vehiculo</a></li>
             </ul>
 
         </div>
@@ -34,6 +33,8 @@
                     <th scope="col">Chasis</th>
                     <th scope="col">Kilometraje</th>
                     <th scope="col">Arrastre</th>
+                    <th scope="col">Modificar</th>
+                    <th scope="col">Borrar</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -47,6 +48,18 @@
                         <td>{{chasis}}</td>
                         <td>{{km_recorrido}}</td>
                         <td>{{descripcion}}</td>
+                        <td>
+                            <form action="vehiculos/modificarVehiculo" id="modificar" method="POST">
+                                <button type="submit" name="modificar_id" value="{{id}}"
+                                        class="btn btn-outline-secondary btn-sm btn-block">Editar</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="vehiculos/borrarVehiculo" id="borrar" method="POST">
+                                <button type="submit" name="borrar_id" value="{{id}}"
+                                        class="btn btn-outline-danger btn-sm btn-block">Borrar</button>
+                            </form>
+                        </td>
                     </tr>
                 {{/vehiculos}}
                 </tbody>
