@@ -28,7 +28,7 @@ class ViajeModel
     }
 
     public function consultarUltimaPosicionDelVehiculo($id_vehiculo){
-        return $this->database->query("SELECT * FROM viaje where id_tractor ='$id_vehiculo' OR id_arrastre ='$id_vehiculo'  AND estado NOT IN ('Finalizado', 'Cancelado')  ORDER BY id DESC ")[0];
+        return $this->database->query("SELECT * FROM viaje where (id_tractor ='$id_vehiculo' OR id_arrastre ='$id_vehiculo') AND latitud is not null AND viaje.longitud is not null ORDER BY id DESC ");
     }
 
     public function actualizarCombustibleConsumidoDeViaje($idViaje,$combustibleAActualizar){

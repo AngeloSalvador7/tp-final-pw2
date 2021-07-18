@@ -21,15 +21,21 @@ class MecanicoController extends SessionCheck
         $datos['vistaDatosVehiculos'] = true;
         $datos['vehiculos'] = $this->vehiculosModel->getVehiculos();
 
-        echo $this->render->render("view/homeMecanicoView.php",$datos);
+        echo $this->render->render("view/homeMecanicoView.php", $datos);
     }
+
     public function posicionVehiculo()
     {
         $datos['vistaPosicionVehiculos'] = true;
-        $datos['vehiculos'] = $this->vehiculosModel->getVehiculos();
-        $datos['latitud'] =$this->viajeModel->consultarUltimaPosicionDelVehiculo($_POST['vehiculo_id'])['latitud'];
-        $datos['longitud'] =$this->viajeModel->consultarUltimaPosicionDelVehiculo($_POST['vehiculo_id'])['longitud'];
-        echo $this->render->render("view/homeMecanicoView.php",$datos);
+        $datos['vehiculo'] = $this->vehiculosModel->getUnicoVehiculo($_POST['vehiculo_id']);
+        if ($this->viajeModel->consultarUltimaPosicionDelVehiculo($_POST['vehiculo_id'])) {
+            $datos['latitud'] = $this->viajeModel->consultarUltimaPosicionDelVehiculo($_POST['vehiculo_id'])[0]['latitud'];
+            $datos['longitud'] = $this->viajeModel->consultarUltimaPosicionDelVehiculo($_POST['vehiculo_id'])[0]['longitud'];
+        }
+        else
+            $datos['mensaje'] = "Vehiculo sin registro de su posición";
+
+        echo $this->render->render("view/homeMecanicoView.php", $datos);
     }
 
     public function service()
@@ -44,9 +50,9 @@ class MecanicoController extends SessionCheck
     public function modificarService()
     {
         $datos['vistaModificarService'] = true;
-       $datos['vehiculos'] = $this->vehiculosModel->getVehiculos();
-       $datos['service']=$this->serviceModel->getServicesbyId($_POST['modificar_id'])[0];
-       $datos['id_service']=$_POST['modificar_id'];
+        $datos['vehiculos'] = $this->vehiculosModel->getVehiculos();
+        $datos['service'] = $this->serviceModel->getServicesbyId($_POST['modificar_id'])[0];
+        $datos['id_service'] = $_POST['modificar_id'];
         echo $this->render->render("view/homeMecanicoView.php", $datos);
     }
 
