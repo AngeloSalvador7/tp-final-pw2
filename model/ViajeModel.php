@@ -24,7 +24,11 @@ class ViajeModel
     }
 
     public function consultarViaje($id_viaje){
-        return $this->database->query("SELECT * FROM viaje where id ='$id_viaje' AND estado NOT IN ('Finalizado', 'Cancelado')")[0];
+        return $this->database->query("SELECT * FROM viaje where id ='$id_viaje' AND estado NOT IN ('Finalizado', 'Cancelado') ")[0];
+    }
+
+    public function consultarUltimaPosicionDelVehiculo($id_vehiculo){
+        return $this->database->query("SELECT * FROM viaje where id_tractor ='$id_vehiculo' OR id_arrastre ='$id_vehiculo'  AND estado NOT IN ('Finalizado', 'Cancelado')  ORDER BY id DESC ")[0];
     }
 
     public function actualizarCombustibleConsumidoDeViaje($idViaje,$combustibleAActualizar){

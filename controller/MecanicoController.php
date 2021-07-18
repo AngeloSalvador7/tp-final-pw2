@@ -27,7 +27,8 @@ class MecanicoController extends SessionCheck
     {
         $datos['vistaPosicionVehiculos'] = true;
         $datos['vehiculos'] = $this->vehiculosModel->getVehiculos();
-
+        $datos['latitud'] =$this->viajeModel->consultarUltimaPosicionDelVehiculo($_POST['vehiculo_id'])['latitud'];
+        $datos['longitud'] =$this->viajeModel->consultarUltimaPosicionDelVehiculo($_POST['vehiculo_id'])['longitud'];
         echo $this->render->render("view/homeMecanicoView.php",$datos);
     }
 
@@ -35,7 +36,6 @@ class MecanicoController extends SessionCheck
     {
         $datos['vistaAccionesService'] = true;
         $datos['service'] = $this->serviceModel->getServices();
-
         if (!$datos['service'])
             $datos['mensaje'] = "No se encontraron services";
         echo $this->render->render("view/homeMecanicoView.php", $datos);
