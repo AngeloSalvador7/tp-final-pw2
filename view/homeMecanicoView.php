@@ -28,4 +28,12 @@
     {{>modificarService}}
 {{/vistaModificarService}}
 
+{{#vistaDatosVehiculos}}
+    {{>datosVehiculos}}
+{{/vistaDatosVehiculos}}
+
+{{#vistaPosicionVehiculos}}
+    {{>posicionVehiculos}}
+{{/vistaPosicionVehiculos}}
+
 {{> footer}}

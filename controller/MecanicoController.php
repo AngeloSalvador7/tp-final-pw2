@@ -18,7 +18,17 @@ class MecanicoController extends SessionCheck
 
     public function execute()
     {
-        echo $this->render->render("view/homeMecanicoView.php");
+        $datos['vistaDatosVehiculos'] = true;
+        $datos['vehiculos'] = $this->vehiculosModel->getVehiculos();
+
+        echo $this->render->render("view/homeMecanicoView.php",$datos);
+    }
+    public function posicionVehiculo()
+    {
+        $datos['vistaPosicionVehiculos'] = true;
+        $datos['vehiculos'] = $this->vehiculosModel->getVehiculos();
+
+        echo $this->render->render("view/homeMecanicoView.php",$datos);
     }
 
     public function service()
