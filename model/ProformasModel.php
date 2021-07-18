@@ -13,7 +13,7 @@ class ProformasModel
     public function getProformas($activo)
     {
         if($activo)
-            return $this->database->query("SELECT * FROM ProformaResumen WHERE Estado IN ('Pendiente', 'En Curso')");
+            return $this->database->query("SELECT * FROM ProformaResumen WHERE estado IN ('Pendiente', 'En Curso')");
         else
             return $this->database->query("SELECT * FROM ProformaResumen WHERE Estado IN ('Finalizado', 'Cancelado')");
     }
