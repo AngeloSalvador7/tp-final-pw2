@@ -1,0 +1,49 @@
+<main class="container-fluid ">
+
+    <div id="main" class="row text-white">
+
+        <div class="info col-12 col-sm-2 bg-dark p-0">
+
+
+
+
+
+        </div>
+
+        <div class="window col-12 col-sm-9 text-dark ">
+            <h1 class="mt-2">Seguimiento de los vehículos en viaje</h1>
+            <hr/>
+            <table class="table text-center ">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Patente</th>
+                    <th scope="col">Kilometraje</th>
+                    <th scope="col">Arrastre</th>
+                    <th scope="col">Posición</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {{#vehiculos}}
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{patente}}</td>
+                        <td>{{km_recorrido}}</td>
+                        <td>{{descripcion}}</td>
+                        <td>
+                                <button type="submit" name="vehiculo_id" value="{{id}}"
+                                        class="btn btn-outline-primary btn-sm btn-block" form="posicion">Ver</button>
+                        </td>
+                    </tr>
+                {{/vehiculos}}
+                </tbody>
+            </table>
+            <form action="mecanico/posicionVehiculo" id="posicion" method="POST"></form>
+
+            <h3>{{mensaje}}</h3>
+        </div>
+
+    </div>
+
+</main>

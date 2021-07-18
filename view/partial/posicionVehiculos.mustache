@@ -1,0 +1,23 @@
+<body onload="posicion({{latitud}},{{longitud}})">
+
+<div id="main" class="row text-white">
+    <div class="info col-12 col-sm-2 bg-dark p-0">
+
+
+    </div>
+
+    <div class="window col-12 col-sm-9 text-dark ">
+        <h1 class="mt-2">Posición del vehiculo
+            {{#vehiculo}} {{patente}} {{/vehiculo}}</h1>
+        <hr/>
+        <h3>{{mensaje}}</h3>
+
+        <div id="mapa" style="max-width: available; height:450px;">
+            <!--mapa-->
+        </div>
+
+    </div>
+
+</div>
+
+</body>

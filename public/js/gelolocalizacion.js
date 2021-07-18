@@ -2,8 +2,7 @@ function loadMap() {
     var output = document.getElementById('map');
     var latitude;
     var longitude;
-    var lng = document.getElementById('longitud');
-    var lng = document.getElementById('latitud');
+
 
     //Obtenemos latitud y longitud
     function localizacion(posicion) {
@@ -64,3 +63,4 @@ function loadMap() {
 
 
 }
+
