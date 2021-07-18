@@ -8,13 +8,10 @@
                 <a class="nav-link" href="home">{{nombre}}</a>
             </li>
             <li class="nav-item px-3">
+                <a class="nav-link" href="">Home</a>
+            </li>
+            <li class="nav-item px-3">
                 <a class="nav-link" href="">Viajes</a>
-            </li>
-            <li class="nav-item px-3">
-                <a class="nav-link" href="">Empleados</a>
-            </li>
-            <li class="nav-item px-3">
-                <a class="nav-link" href="">Estadisticas</a>
             </li>
         </ul>
     </div>

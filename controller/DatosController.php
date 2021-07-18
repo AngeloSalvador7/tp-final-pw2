@@ -43,4 +43,5 @@ class DatosController extends SessionCheck
         $vehiculo = empty($_GET['vehiculo']) ? 0 : intval($_GET['vehiculo']);
         echo json_encode($this->datosModel->rendVehiculoKm($vehiculo));
     }
+
 }

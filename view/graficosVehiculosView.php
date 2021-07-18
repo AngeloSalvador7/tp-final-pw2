@@ -21,6 +21,7 @@
             </ul>
 
         </div>
+
         <div class="window text-dark mx-3 col-12 col-sm-9">
             <form action="datos/vehiculos/" method="GET" class="d-flex mt-3">
                 <label for="vehiculo" class="mt-2 me-3">Vehiculo:</label>

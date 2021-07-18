@@ -7,9 +7,6 @@
             <li class="nav-item px-3">
                 <a class="nav-link" href="empleados">Empleados</a>
             </li>
-            <li class="nav-item px-3">
-                <a class="nav-link" href="home">Estadisticas</a>
-            </li>
         </ul>
     </div>
 </nav>

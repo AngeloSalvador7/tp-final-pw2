@@ -41,10 +41,16 @@ function loadMap() {
                 map: map,
                 draggable: true,
             });
+
             form = document.getElementById("formulario");
             form.lat.value = latitude;
             form.lon.value = longitude;
+
+            document.getElementById("msj").removeAttribute("style");
+            document.getElementById("latitud").innerHTML=latitude;
+            document.getElementById("longitud").innerHTML=longitude;
         });
+
 
         form = document.getElementById("formulario");
         form.lat.value = latitude;
