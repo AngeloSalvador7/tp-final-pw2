@@ -1,4 +1,4 @@
-google.charts.load('current', { 'packages': ['corechart', 'bar'] });
+google.charts.load('current', {'packages': ['corechart', 'bar']});
 
 google.charts.setOnLoadCallback(estadoViajes);
 google.charts.setOnLoadCallback(ganancias);
@@ -35,7 +35,7 @@ function ganancias() {
                 subtitle: 'Ingresos, Gastos, y Ganancias: 2021',
             },
             bars: 'vertical',
-            vAxis: { format: 'decimal' },
+            vAxis: {format: 'decimal'},
             height: 350,
             colors: ['#1b9e77', '#d95f02', '#7570b3']
         };
