@@ -1,5 +1,4 @@
 <?php
-
 class EmpleadosController extends SessionCheck
 {
     private $render;
@@ -10,7 +9,6 @@ class EmpleadosController extends SessionCheck
         parent::__construct("ADMINISTRADOR");
         $this->render = $render;
         $this->empleadosModel = $empleadosModel;
-
     }
 
     public function execute(){
@@ -22,7 +20,6 @@ class EmpleadosController extends SessionCheck
         $datos['empleadosSinRol'] = true;
 
         echo $this->render->render("view/empleadosView.php", $datos);
-
     }
 
     public function empleadosSinRol()
@@ -76,5 +73,4 @@ class EmpleadosController extends SessionCheck
         }
         $this->execute();
     }
-
 }

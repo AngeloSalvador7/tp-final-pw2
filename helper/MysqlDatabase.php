@@ -28,6 +28,31 @@ class MysqlDatabase{
         return mysqli_affected_rows($this->connection);
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function idGen(){
         return $this->connection->insert_id;
     }
